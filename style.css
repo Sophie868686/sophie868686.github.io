@@ -32,6 +32,12 @@
       align-items: center;
       gap: 10px;
     }
+    
+    .custom-logo {
+    height: 30px; /* 讓圖片高度跟原本的印章圖示一樣 */
+    width: auto;  /* 寬度會根據圖片比例自動調整，不會變形 */
+    display: block;
+}
 
     .logo-img {
       height: 45px; /* 品牌 Logo */
