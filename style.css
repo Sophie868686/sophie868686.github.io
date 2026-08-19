@@ -247,6 +247,9 @@
     }
 
     /* 電腦板下拉選單外層容器 */
+    /* ========================================= */
+    /* 第一層選單（您原本的設定）                  */
+    /* ========================================= */
     .dropdown {
         position: relative;
         display: inline-block;
@@ -266,10 +269,9 @@
         padding: 8px 0;
         z-index: 1000;
         border: 1px solid #e1e8ed;
-        
     }
 
-    /* 下拉選單內的子連結 */
+    /* 下拉選單內的子連結（共用樣式） */
     .dropdown-menu a {
         color: #333333;
         padding: 12px 15px;
@@ -278,10 +280,13 @@
         font-size: 14px;
         white-space: normal; /* 允許換行 */
         transition: background-color 0.2s, color 0.2s;
-        border-bottom: 1px solid #eee; /* 建議加上淡淡的分隔線，區分不同項目 */
+        border-bottom: 1px solid #eee; /* 淡淡的分隔線 */
     }
-    .dropdown-menu a:last-child {
-      border-bottom: none;
+
+    /* 去除最後一個項目的底線 (包含第一層與第二層) */
+    .dropdown-menu a:last-child,
+    .dropdown-submenu:last-child > a {
+        border-bottom: none;
     }
 
     /* 當滑鼠移入下拉子項目時 */
@@ -290,47 +295,117 @@
         color: #0066cc;
     }
 
-    /* 核心魔法：滑鼠移入 .dropdown 容器時，顯示下拉選單 */
-    .dropdown:hover .dropdown-menu {
+    /* 核心魔法：滑鼠移入 .dropdown 容器時，顯示第一層選單 */
+    .dropdown:hover > .dropdown-menu {
         display: block;
     }
 
-    /* 滑鼠懸停時箭頭稍微旋轉（增添視覺質感） */
+    /* 滑鼠懸停時向下箭頭稍微旋轉 */
     .dropdown:hover .fa-angle-down {
         transform: rotate(180deg);
         transition: transform 0.3s;
     }
 
-    /* 確保父元素可以作為絕對定位的基準 */
-    /* 1. 確保父容器是相對定位 */
-.floating-socials {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 1000;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end; /* 讓內容靠右對齊 */
-}
+    /* ========================================= */
+    /* 新增的「第二層選單」CSS 樣式                */
+    /* ========================================= */
+    .dropdown-submenu {
+        position: relative;
+    }
 
-/* 2. 更新 QR Code 的 CSS 樣式 (關鍵！) */
-#line-qrcode {
-  display: none; /* 預設隱藏 */
-  width: 250px;  /* 圖片寬度 */
-  height: 250px;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  
-  /* 關鍵修正：使用絕對定位，讓它漂浮而不影響原本圖示 */
-  position: absolute;
-  bottom: 70px; /* 調整這個值，讓它顯示在 LINE 按鈕的正上方 */
-  right: 0;
-}
+    /* 讓帶有子選單的母按鈕，在懸停時保持高亮狀態 */
+    .dropdown-submenu:hover > a {
+        background-color: #f7f9fc;
+        color: #0056b3;
+    }
 
-/* 用一個簡單的 hover 規則來控制顯示 */
-.floating-socials:hover #line-qrcode {
-  display: block;
-}
+    /* 母按鈕右側箭頭的旋轉動畫 */
+    .dropdown-submenu > a > i {
+        transition: transform 0.3s ease;
+    }
+    /* 展開時箭頭向上翻轉180度 */
+    .dropdown-submenu.active a > i {
+        transform: rotate(180deg); 
+    }
+
+    .submenu-content {
+        /* 核心魔法：使用 max-height 創造手風琴般的滑順下拉效果 */
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: max-height 0.4s ease-in-out, opacity 0.3s ease;
+        
+        /* 🌟 關鍵修改：取消絕對定位，讓它留在原本的排列中撐開高度 */
+        position: relative; 
+        width: 100%; 
+        
+        /* 視覺層級區分：加上淡淡的灰底色與內陰影，營造凹下去的感覺 */
+        background-color: #f8fafc; 
+        box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.03);
+        border-radius: 0; 
+        border: none;
+        z-index: 1;
+    }
+
+    /* 當滑鼠移入分類時，向下展開第二層 */
+    .dropdown-submenu.active > .submenu-content {
+        max-height: 800px; /* 設定一個大於內容實際總高度的安全值即可 */
+        opacity: 1;
+    }
+
+    /* ========================================= */
+    /* 調整第二層項目的文字與層級感                */
+    /* ========================================= */
+    .submenu-content a {
+        padding-left: 32px; /* 增加左邊距，產生「縮進」的樹狀階層感 */
+        font-size: 13px; /* 字體稍微縮小，區分主次 */
+        color: #555;
+        background-color: transparent;
+        border-bottom: 1px solid #edf1f5;
+    }
+
+    /* 第二層最後一個項目不要底線 */
+    .submenu-content a:last-child {
+        border-bottom: none;
+    }
+
+    /* 懸停時的微互動 */
+    .submenu-content a.active {
+        color: #0056b3;
+        padding-left: 38px; /* 一樣保留滑鼠移入時往右微推的質感 */
+    }
+
+
+        /* 確保父元素可以作為絕對定位的基準 */
+        /* 1. 確保父容器是相對定位 */
+    .floating-socials {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end; /* 讓內容靠右對齊 */
+    }
+
+    /* 2. 更新 QR Code 的 CSS 樣式 (關鍵！) */
+    #line-qrcode {
+      display: none; /* 預設隱藏 */
+      width: 250px;  /* 圖片寬度 */
+      height: 250px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      
+      /* 關鍵修正：使用絕對定位，讓它漂浮而不影響原本圖示 */
+      position: absolute;
+      bottom: 70px; /* 調整這個值，讓它顯示在 LINE 按鈕的正上方 */
+      right: 0;
+    }
+
+    /* 用一個簡單的 hover 規則來控制顯示 */
+    .floating-socials.active #line-qrcode {
+      display: block;
+    }
         
         /* 響應式調整 (Mobile Adaptive) */
     @media (max-width: 768px) {
