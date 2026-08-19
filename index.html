@@ -42,8 +42,8 @@
     }
 
     .notary-avatar {
-      width: 60px;
-      height: 60px;
+      width: 85px;
+      height: 85px;
       background-color: #eaf2f8;
       color: #003366;
       border-radius: 50%;
@@ -52,6 +52,15 @@
       align-items: center;
       font-size: 26px;
       flex-shrink: 0;
+      overflow: hidden; /* ⚠️ 記得補上這行：讓超出圓形範圍的照片被裁切掉 */
+    }
+
+    /* 👇 加入這段全新的 CSS：控制照片不變形 */
+    .notary-avatar img {
+      width: 90%;
+      height: 90%;
+      object-fit: cover; /* 自動裁切並完美填滿，保證照片比例不失真 */
+      display: block;
     }
 
     .notary-title h2 {
@@ -158,7 +167,8 @@
       <div class="notary-card">
         <div class="notary-header">
           <div class="notary-avatar">
-            <i class="fa-solid fa-user-tie"></i>
+            <!-- 把原本的 i 標籤換成 img 標籤，並填入正確的照片路徑 -->
+          <img src="./P/wang.jpg" alt="汪家合 公證人">
           </div>
           <div class="notary-title">
             <h2>汪家合 公證人</h2>
