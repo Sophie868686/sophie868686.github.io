@@ -8,19 +8,20 @@
   <!-- 引入 FontAwesome 圖示庫 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-  <!-- 引入全站共用樣式表 (预留) -->
+  <!-- 引入全站共用樣式表 -->
   <link rel="stylesheet" href="style.css">
   
-  <!-- 引入本頁專用文章排版樣式 -->
+  <!-- 引入本頁專用文章排版樣式 (剛剛獨立出來的檔案) -->
   <link rel="stylesheet" href="article-style.css">
 </head>
 <body>
 
   <!-- 1. Header 頁首導覽 (保持預留) -->
   <div id="header-container"></div>
+
   <!-- 3. 麵包屑導航 (Breadcrumb) (保持預留) -->
   <div class="breadcrumb-container">
-    <a href="/index.html">首頁</a> > <span>房屋租約公證</span> > <span>房客節稅指引</span>
+    <a href="index.html">首頁</a> > <span>房屋租約公證</span> > <span>租金節稅指引</span>
   </div>
 
   <!-- 4. 主要內容區域 -->
@@ -31,69 +32,99 @@
     <!-- 網格容器：所有區塊將在此垂直堆疊呈現 -->
     <div class="horizontal-grid">
       
-      <!-- 區塊一：住宅用房客列舉扣除額 -->
+      <!-- 區塊一：住宅用房客 -->
       <section class="section-block">
         <h2 class="section-title">
-          <i class="fa-solid fa-house-chimney-user"></i> 【住宅用房客】最高12萬元的租金支出列舉扣除額
+          <i class="fa-solid fa-house-user"></i> 【住宅用房客】最高18萬元的租金支出特別扣除額
         </h2>
         <div class="section-content">
           <p>
-            房客租屋作<span class="highlight-text">住家用</span>，於申報綜合所得稅時，得將房租支出列為費用扣除，每年最高的租金扣除上限為 <span class="highlight-text">12 萬元</span>。
+            房客租屋作住家用，於申報綜合所得稅時，得將房租支出列為費用扣除，每年最高的租金扣除上限為 <strong>18萬元</strong>。
           </p>
           <p>
-            以106年度綜所稅申報為例，標準扣除額為9萬元，故每個月租金支出超過7500元者，採用列舉扣除額的申報方式可以繳納較少的綜所稅。
+            且自 114 年度（115 年 5 月綜所稅申報）起，租金已經由【列舉扣除額】改列為<span class="highlight-text">【特別扣除額】</span>。此意味著：報綜所稅時，房客可以使用【標準扣除額】以外，每戶每年最高可以再扣 18 萬元的【特別扣除額】，<strong>毋庸</strong>在兩者間二擇一，兩者都可以同時扣除。
           </p>
           
           <div class="info-box">
-            <div class="info-box-title"><i class="fa-solid fa-lightbulb"></i> 小提醒：</div>
-            <p>若房客名下有房屋，且因繳納房屋貸款利息而申報房屋貸款利息為綜所稅的列舉扣除項目，就無法再將房租支出列為費用扣除。</p>
-            <p style="margin-top: 6px; font-weight: 500; color: #0066cc;">也就是說，僅能<span class="highlight-text">擇一</span>申報「房屋貸款利息」或「房租支出」為列舉扣除項目，納稅義務人可試算兩者可扣除之金額，並申報金額較大者。</p>
+            <div class="info-box-title"><i class="fa-solid fa-clipboard-list"></i> 小提醒：</div>
+            
+            <p style="margin-top: 10px;"><strong>1. 申報租金支出特別扣除額，需要同時符合以下條件：</strong></p>
+            <ul class="custom-list">
+              <li><strong>租屋限供自住使用：</strong>不能是營業或執行業務使用。</li>
+              <li>承租人為本人、配偶或受扶養直系親屬。</li>
+              <li>在中華民國境內租屋。</li>
+              <li>納稅義務人本人、配偶及受扶養直系親屬在國內無自有房屋或無以設定地上權方式之房屋使用權者。</li>
+            </ul>
+
+            <p style="margin-top: 15px;"><strong>2. 申報時，提供給國稅局的資料如下：</strong></p>
+            <ul class="custom-list">
+              <li><strong>租約影本</strong>。</li>
+              <li><strong>租金付款證明：</strong>如出租人簽收的收據、自動櫃員機轉帳交易明細表或匯款證明。</li>
+              <li><strong>自住證明（二擇一）：</strong>課稅年度內已將戶籍遷入租賃地址之證明；或納稅義務人載明承租的房屋於課稅年度內係供自住且非供營業或執行業務使用的切結書。</li>
+            </ul>
           </div>
-        </div>
-      </section>
 
-      <!-- 區塊二：營業用房客租金申報 -->
-      <section class="section-block">
-        <h2 class="section-title">
-          <i class="fa-solid fa-briefcase"></i> 【營業用房客】得申報實際支出的房租
-        </h2>
-        <div class="section-content">
-          <p>
-            租屋作<span class="highlight-text">營業用</span>，房客並<span class="highlight-text">不受限於 12 萬元的上限</span>，房客得以<span class="highlight-text">實際支出</span>的租金作為費用申報。
-          </p>
-        </div>
-      </section>
-
-      <!-- 區塊三：營業用房客水電費申報新制 -->
-      <section class="section-block">
-        <h2 class="section-title">
-          <i class="fa-solid fa-plug-circle-exclamation"></i> 【營業用房客】自107年7月起，水電費須變更為房客名義才能申報為費用
-        </h2>
-        <div class="section-content">
-          <p>
-            <strong>107年6月以前：</strong><br>
-            水錶、電錶的名義人為房東，租約若有約定水電費由房客負擔，房客可以將營業用水電費列為費用報稅。
-          </p>
-          <p style="margin-top: 15px;">
-            <strong>107年7月以後：</strong><br>
-            房客若要將水電費等公用事業費用申報扣抵，須取具買受人為承租營業人之<span class="highlight-text">統一發票</span>申報扣抵銷項稅額。
-          </p>
+          <div class="info-box" style="background-color: #fff8f0; border-left-color: #f37023;">
+            <div class="info-box-title" style="color: #f37023;"><i class="fa-solid fa-circle-exclamation"></i> 排富條款注意：</div>
+            <p>此 18 萬元之特別扣除額有排富條款，若有以下情況<span class="highlight-text">無法適用</span>此特別扣除額：</p>
+            <ul class="custom-list" style="margin-top: 5px;">
+              <li>綜合所得稅適用稅率在 <strong>20%</strong> 以上者。</li>
+              <li>選擇股利及盈餘按 <strong>28%</strong> 單一稅率分開計算應納稅額。</li>
+              <li>依所得基本稅額條例計算之基本所得額超過規定之扣除金額（114年度為 750 萬元）。</li>
+            </ul>
+          </div>
           
-          <div class="warning-box" style="margin-top: 20px; border-left-color: #d9534f; background-color: #fff5f5; padding: 15px;">
+          <p style="font-size: 13px; color: #888; margin-top: 15px;">
+            ※資料來源參考：財政部稅務入口網「<a href="https://www.etax.nat.gov.tw/etwmain/tax-info/understanding/tax-q-and-a/national/individual-income-tax/exemption-scope/filling/mMbJabb" target="_blank">1210綜合所得稅申報房屋租金支出特別扣除之規定如何？</a>」
+          </p>
+        </div>
+      </section>
+
+      <!-- 區塊二：營業用房客實際支出 -->
+      <section class="section-block">
+        <h2 class="section-title">
+          <i class="fa-solid fa-store"></i> 【營業用房客】得申報實際支出的房租
+        </h2>
+        <div class="section-content">
+          <p>
+            租屋作營業用，房客並不受限於 18 萬元的上限，房客得以<span class="highlight-text">實際支出的租金</span>作為費用申報。
+          </p>
+        </div>
+      </section>
+
+      <!-- 區塊三：營業用房客水電費變更 -->
+      <section class="section-block">
+        <h2 class="section-title">
+          <i class="fa-solid fa-bolt"></i> 【營業用房客】水電費須變更為房客名義
+        </h2>
+        <div class="section-content">
+          <p>自 107 年 7 月起，水電費須變更為房客名義才能申報為費用：</p>
+          <ul class="custom-list">
+            <li>
+              <strong>107年6月以前：</strong><br>
+              水錶、電錶的名義人為房東，租約若有約定水電費由房客負擔，房客可以將營業用水電費列為費用報稅。
+            </li>
+            <li style="margin-top: 10px;">
+              <strong>107年7月以後：</strong><br>
+              房客若要將水電費等公用事業費用申報扣抵，須取具<span class="highlight-text">買受人為承租營業人之統一發票</span>申報扣抵銷項稅額。
+            </li>
+          </ul>
+          
+          <div class="info-box" style="border-left-color: #d9534f; background-color: #fff5f5; padding: 15px; margin-top: 20px;">
             <p style="font-weight: 600; color: #d9534f; margin: 0; font-size: 15px;">
-              👉 為免未能申報水電費用，營業用房客應盡速將承租店面、辦公室之水錶、電表<span class="highlight-text">變更為房客名義</span>，水電費之統一發票亦要<span class="highlight-text">打統一編號</span>，以申報扣抵稅額。
+              👉 為免未能申報水電費用，營業用房客應盡速將承租店面、辦公室之水錶、電表<span class="highlight-text">變更為房客名義</span>，水電費之統一發票務必要打統一編號，以申報扣抵稅額。
             </p>
           </div>
           
-          <p style="font-size: 13px; color: #718096; margin-top: 20px; border-top: 1px solid #eee; padding-top: 10px;">
-            參考財政部高雄國稅局新聞稿【營業人租用辦公室所支付水、電等公用事業費用，取得以出租人名義之統一發票可否申報扣抵？】
+          <p style="font-size: 13px; color: #888; margin-top: 15px;">
+            ※資料來源參考：財政部稅務入口網「<a href="https://www.etax.nat.gov.tw/etwmain/tax-info/understanding/tax-q-and-a/national/business-tax/calculation/Z9BEKBr" target="_blank">營業人租用辦公室所支付水、電費未載明營業人名稱可否扣抵？(9312)</a>」
           </p>
         </div>
       </section>
 
     </div>
   </article>
-</main>
+  </main>
 
   <!-- 5. Footer 頁尾 (保持預留) -->
   <div id="footer-container"></div>
