@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>營業人出租財產收取押金別忘設算押金利息計算銷售額 - 三民公證</title>
+  <!-- 引入 FontAwesome 圖示庫 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="story-style.css">
+</head>
+
+<body>
+
+  <!-- 1. Header 頁首導覽 -->
+  <div id="header-container"></div>
+
+  <!-- 麵包屑導航 (Breadcrumb) -->
+  <div class="breadcrumb-container">
+    <a href="../index.html">首頁</a> &gt; <span>稅務新聞</span> &gt; <span>以房地借名登記向銀行貸款</span>
+  </div>
+
+  <main>
+ 
+<!--1-->
+    <h1 class="case-title" id="case1">營業人出租財產收取押金別忘設算押金利息計算銷售額</h1>
+    <div class="news-container">
+
+        <div class="news_text">
+            財政部高雄國稅局表示，營業人出租財產所收取之押金應設算利息，按月計算銷售額，不滿一月者，免予計算。又為簡化加值型及非加值型營業稅法(以下簡稱營業稅法)第4章第1節之營業人開立發票程序，若營業人收取押金計息金額零星，可改按年計算押金利息，並於首月按全年之利息開立統一發票。至於利率部分，不論按月或按年計算押金利息之利率為該年1月1日郵政定期儲金1年期固定利率。
+        </div>
+        <div class="news_text">
+            該局舉例說明，A公司於111年1月1日出租房屋予B公司，收取押金100萬元，該年1月1日郵政定期儲金1年期固定利率0.78%，每月押金設算利息650元（含稅；100萬元×0.78%/12），A公司應按月開立銷售額619元及稅額31元之統一發票予B公司。或可選擇按年計算押金利息7,800元，於111年1月開立銷售額7,429元及稅額371元之統一發票予B公司。
+        </div>
+        <div class="news_text">
+            該局提醒營業人，出租財產應注意開立統一發票相關規定，倘押金未依規定設算利息開立統一發票並報繳營業稅，在未經檢舉或稽徵機關調查前，請儘速自動補報及補繳稅款，以免因漏報而受罰。至於營業稅法第4章第2節規定之營業人，仍應按月計算銷售額。
+        </div>  
+        <div class="source-info">
+            提供單位：楠梓稽徵所<br>
+            聯絡人：謝昆忠主任 聯絡電話：(07)3522491分機5000<br>
+            撰稿人：江健銘 聯絡電話：(07)3614112 分機5217<br>
+        </div>
+    </div>
+    <!-- <img src="../p/archives-1.jpg" alt="判決相關圖片說明" class="case-photo"> -->
+  </main>
+
+  <!-- Footer 頁尾 -->
+  <div id="footer-container"></div>
+ 
+  <script>
+      // 載入 Header
+      fetch('../header.html')
+      .then(response => response.text())
+      .then(data => {
+        // 1. 將抓取到的 HTML 塞入容器中
+        document.getElementById('header-container').innerHTML = data;
+
+        // =========================================
+        // 2. 處理原本的手機版漢堡選單
+        // =========================================
+        const menuToggle = document.getElementById('menuToggle');
+        const mainNav = document.getElementById('mainNav');
+        
+        if (menuToggle && mainNav) {
+          menuToggle.addEventListener('click', function() {
+            mainNav.classList.toggle('active');
+          });
+        }
+
+        // =========================================
+        // 3. 處理「稅務新聞」兩層選單點擊展開邏輯
+        // =========================================
+        // ⚠️ 此時網頁裡已經有 header 的內容了，可以安心選取
+        const submenuBtns = document.querySelectorAll(".dropdown-submenu > a");
+
+        submenuBtns.forEach(btn => {
+          btn.addEventListener("click", function (e) {
+            e.preventDefault();       // 阻止預設跳轉
+            e.stopPropagation();      // 防止事件往上冒泡
+
+            const currentSubmenu = this.parentElement;
+
+            // 手風琴效果：關閉其他已經展開的子選單
+            document.querySelectorAll(".dropdown-submenu").forEach(item => {
+              if (item !== currentSubmenu) {
+                item.classList.remove("active");
+              }
+            });
+
+            // 切換目前點擊項目的展開 / 收合狀態
+            currentSubmenu.classList.toggle("active");
+          });
+        });
+
+      })
+      .catch(error => {
+        console.error('載入 header 時發生錯誤:', error);
+      });
+
+      // 載入 Footer
+      fetch('../footer.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('footer-container').innerHTML = data;
+        });
+  </script>
+</body>
+</html>
+
