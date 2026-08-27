@@ -7,25 +7,62 @@
   <!-- 引入 FontAwesome 圖示庫 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="../style.css">
-  <link rel="stylesheet" href="/read_story/story-style.css">
+  <link rel="stylesheet" href="news-style.css">
 </head>
 
 <body>
-
   <!-- 1. Header 頁首導覽 -->
   <div id="header-container"></div>
 
-  <!-- 麵包屑導航 (Breadcrumb) -->
-  <div class="breadcrumb-container">
-    <a href="../index.html">首頁</a> &gt; <span>稅務新聞</span> &gt; <span>出租人相關稅務</span>
-  </div>
+  <!-- 內容區塊外掛容器 (雙欄佈局) -->
+  <div class="content-wrapper">
+    
+    <!-- 左側邊欄 -->
+    <aside class="sidebar">
+      <ul class="sidebar-menu">
+        <!-- 頂部藍色按鈕 -->
+        <!-- <li><a href="#" class="sidebar-title active">最新消息</a></li> -->
 
-  <main>
- 
-<!--1-->
-    <h1 class="case-title" id="case1">營業人出租財產收取押金別忘設算押金利息計算銷售額</h1>
-    <div class="news-container">
+        <!-- 法律文章分類 -->
+        <li>
+          <div class="sidebar-category">法律文章</div>
+          <ul class="sidebar-submenu">
+            <li><a href="#">出租人相關稅務</a></li>
+            <li><a href="#">承租人相關稅務</a></li>
+            <li><a href="#">其他法律問題</a></li>
+          </ul>
+        </li>
+        
+        <!-- 新知分享分類 -->
+        <!-- <li>
+          <div class="sidebar-category">新知分享</div>
+          <ul class="sidebar-submenu">
+            <li><a href="#">租賃/無償借用</a></li>
+            <li><a href="#">贈與</a></li>
+          </ul>
+        </li> -->
+        
+        <!-- 近期公告 -->
+        <li>
+          <div class="sidebar-category border-bottom-none">近期公告</div>
+        </li>
+      </ul>
+    </aside>
 
+    <!-- 右側主內容 -->
+    <main class="main-content">
+      
+      <!-- 頂部標題與麵包屑 (參考圖片的排版，將兩者放在同一列) -->
+      <div class="main-header-area">
+        <h2 class="section-title">出租人相關稅務</h2>
+        <!-- <div class="breadcrumb-container">
+          <a href="../index.html"><i class="fas fa-home"></i></a> &gt; <span>稅務新聞</span> &gt; <span>出租人相關稅務</span>
+        </div> -->
+      </div>
+
+      <!-- 您原本的內文 -->
+      <h1 class="case-title" id="case1">營業人出租財產收取押金別忘設算押金利息計算銷售額</h1>
+      <div class="news-container">
         <div class="news_text">
             財政部高雄國稅局表示，營業人出租財產所收取之押金應設算利息，按月計算銷售額，不滿一月者，免予計算。又為簡化加值型及非加值型營業稅法(以下簡稱營業稅法)第4章第1節之營業人開立發票程序，若營業人收取押金計息金額零星，可改按年計算押金利息，並於首月按全年之利息開立統一發票。至於利率部分，不論按月或按年計算押金利息之利率為該年1月1日郵政定期儲金1年期固定利率。
         </div>
@@ -40,13 +77,15 @@
             聯絡人：謝昆忠主任 聯絡電話：(07)3522491分機5000<br>
             撰稿人：江健銘 聯絡電話：(07)3614112 分機5217<br>
         </div>
-    </div>
-    <!-- <img src="../p/archives-1.jpg" alt="判決相關圖片說明" class="case-photo"> -->
-  </main>
+      </div>
+    </main>
+
+  </div>
 
   <!-- Footer 頁尾 -->
   <div id="footer-container"></div>
- 
+  
+  <!-- 這裡保留您原本的 Script... -->
   <script>
       // 載入 Header
       fetch('../header.html')

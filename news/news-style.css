@@ -1,0 +1,302 @@
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding:0px 20px;
+    font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Heiti TC", "Microsoft JhengHei", sans-serif;
+    line-height: 1.8;
+    color: #333;
+    background-color: #fcfcfc;
+  }
+  
+
+  .case-title {
+    color: #c9302c;
+    font-size: 1.8em;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #d9cfc4;
+  }
+
+  .section-title {
+    color: #337ab7;
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+  }
+
+  .section-title::before {
+    content: "";
+    display: inline-block;
+    width: 4px;
+    height: 20px;
+    background-color: #337ab7;
+    margin-right: 10px;
+    border-radius: 2px;
+  }
+
+  p {
+    margin-bottom: 15px;
+    text-align: justify;
+  }
+
+  .news_text {
+  /* 🌟 核心：段落底部的空白距離，數值越大，段落感越明顯 */
+  margin-bottom: 30px; 
+  
+  /* 行高：讓同一段落內的文字不會太擁擠 (截圖中的行距看起來很舒適) */
+  line-height: 1.8; 
+  
+  /* 左右對齊：讓文章左右邊緣像截圖一樣整齊切齊 */
+  text-align: justify;
+  text-justify: inter-ideograph;
+  
+  /* 字體微調 (可選) */
+  color: #333;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  font-weight: bold;
+}
+
+/* (可選) 取消最後一段的多餘空白，讓排版更緊湊 */
+.news_text:last-child {
+  margin-bottom: 30px; /* 這裡可以調整為你想要的底部空白距離 */
+}
+  
+
+/* 強調色塊：判決結果 */
+.verdict-box {
+  background-color: #e0f1f7;
+  border-left: 5px solid #2e698e;
+  padding: 20px;
+  margin: 25px 0;
+  border-radius: 0 4px 4px 0;
+}
+
+.verdict-box h3 {
+  color: #236887;
+  margin: 0 0 10px 0;
+  font-size: 1.2em;
+}
+
+/* 強調色塊：結論 */
+.conclusion-box {
+  background-color: #fcf8e3;
+  border-left: 5px solid #8a6d3b;
+  padding: 20px;
+  margin: 25px 0;
+  border-radius: 0 4px 4px 0;
+}
+
+.conclusion-box h3 {
+  color: #8a6d3b;
+  margin: 0 0 10px 0;
+  font-size: 1.2em;
+}
+
+ul.reason-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul.reason-list li {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+ul.reason-list li strong {
+  color: #d9534f;
+  display: block;
+  margin-bottom: 5px;
+  font-size: 1.1em;
+}
+
+.source-info {
+  margin-top: 40px;
+  padding-top: 15px;
+  border-top: 1px dashed #ccc;
+  font-size: 0.9em;
+  color: #777;
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 4px;
+}
+
+.source-info ul {
+  padding-left: 20px;
+  margin-top: 10px;
+}
+
+img.case-photo {
+    max-width: 80%;       /* 讓圖片寬度最多不超過螢幕/容器，確保手機版不會破版 */
+    height: auto;          /* 保持圖片原本的長寬比例不變形 */
+    display: block;        /* 讓圖片獨立佔用一行 */
+    margin: 20px auto 50px;   
+    border-radius: 8px;    /* (可選) 讓圖片四角變成微圓角，看起來比較有質感 */
+  }
+    /* 文章分隔線樣式 */
+  .article-divider {
+    border: none;                     /* 先清除瀏覽器預設的線條樣式 */
+    border-top: 2px dashed #d9cfc4;   /* 設定上方框線：2px粗、虛線、淺卡其色(與您原本的設計呼應) */
+    margin: 60px 0;                   /* 🌟 核心：上下各空出 60px 的大距離，左右不留白 */
+    width: 100%;                      /* 確保線條寬度滿版 */
+  }
+  /* 🌟 重點強調文字顏色 */
+  .highlight-red {
+    color: #d9534f; /* 警告紅：適合罰單、刑責 */
+  }
+
+  .highlight-blue {
+    color: #337ab7; /* 專業藍：適合日期、法規條件 */
+  }
+  /* --- 雙欄佈局外觀 --- */
+  .content-wrapper {
+    display: flex;
+    max-width: 1200px; /* 您可依原本網站寬度調整 */
+    margin: 40px auto;
+    padding: 0 20px;
+    gap: 40px; /* 左側邊欄與右側內容的間距 */
+    align-items: flex-start;
+  }
+
+  /* --- 左側邊欄設計 --- */
+  .sidebar {
+    width: 180px;
+    flex-shrink: 0;
+  }
+
+  .sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .sidebar-menu > li {
+    margin-bottom: 15px;
+  }
+
+  /* 最新消息-藍色按鈕 */
+  .sidebar-title {
+    display: block;
+    padding: 12px 20px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  .sidebar-title.active {
+    background-color: #79B5D2; /* 參考圖片的淺藍色 */
+    color: #ffffff;
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  /* 分類標題 (法律文章等) */
+  .sidebar-category {
+    font-size: 16px;
+    color: #333;
+    margin: 15px 0 10px 20px;
+  }
+
+  /* 子選單樣式 */
+  .sidebar-submenu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 15px;
+  }
+
+  .sidebar-submenu li a {
+    display: block;
+    padding: 8px 20px 8px 35px; /* 增加左側 padding 容納圖示 */
+    color: #555;
+    text-decoration: none;
+    font-size: 15px;
+    position: relative;
+  }
+
+  .sidebar-submenu li a:hover {
+    color: #79B5D2;
+  }
+
+  /* 子選單前方的 > 圖示 (使用您引入的 FontAwesome) */
+  .sidebar-submenu li a::before {
+    content: "\f105"; /* angle-right icon */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    left: 20px;
+    color: #999;
+    font-size: 14px;
+  }
+
+  /* 移除最後一項的底線 */
+  .border-bottom-none {
+    border-bottom: none;
+  }
+
+  /* --- 右側主內容區塊 --- */
+  .main-content {
+    flex-grow: 1;
+    width: calc(100% - 290px);
+  }
+
+  /* 圖片中右側頂部的 標題與麵包屑 佈局 */
+  .main-header-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 2px solid #3b6b9a; /* 參考圖片藍色底線 */
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+  }
+
+  .section-title {
+    color: #3b6b9a;
+    margin: 0;
+    font-size: 26px;
+    font-weight: normal;
+  }
+
+  .breadcrumb-container {
+    font-size: 14px;
+    color: #777;
+  }
+
+  .breadcrumb-container a {
+    color: #777;
+    text-decoration: none;
+  }
+
+  .breadcrumb-container a:hover {
+    color: #3b6b9a;
+  }
+    /* --- 手機/平板版響應式設計 (RWD) --- */
+  @media screen and (max-width: 768px) {
+    
+    /* 1. 隱藏左側邊欄 */
+    .sidebar {
+      display: none;
+    }
+
+    /* 2. 讓右側主內容佔滿 100% 寬度 */
+    .main-content {
+      width: 100%;
+    }
+
+    /* 3. 調整上方標題與麵包屑的排版，避免手機版太擠 */
+    .main-header-area {
+      flex-direction: column; /* 改為上下垂直排列 */
+      align-items: flex-start; /* 靠左對齊 */
+      gap: 10px; /* 標題與麵包屑之間增加一點空隙 */
+    }
+  }
