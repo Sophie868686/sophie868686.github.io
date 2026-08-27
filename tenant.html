@@ -14,6 +14,25 @@
   <!-- 引入本頁專用文章排版樣式 (剛剛獨立出來的檔案) -->
   <link rel="stylesheet" href="article-style.css">
 </head>
+<style>
+    /* 放大主要內文與清單的字體 */
+    .section-content p, 
+    .section-content .custom-list li {
+      font-size: 24px; /* 數值可以自己微調，例如改成 20px */
+      line-height: 1.8; /* 順便加寬行距，讓大字體閱讀起來更舒服 */
+    }
+
+    /* 放大提示框 (info-box) 與警告框 (warning-box) 內的字體 */
+    .info-box p, 
+    .warning-box p {
+      font-size: 17px; /* 數值可以自己微調 */
+    }
+
+    /* 放大標題的字體 (如果需要的話) */
+    .section-title {
+      font-size: 24px;
+    }
+</style>
 <body>
 
   <!-- 1. Header 頁首導覽 (保持預留) -->
