@@ -8,11 +8,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
   <style>
-
-    /* 3. 主要內容區域 - 修改為單欄滿版直排 */
+    /* 基本排版 */
     .container {
       display: block !important;
-      max-width: 800px;
+      max-width: 1000px; /* 加寬以容納表格 */
       margin: 20px auto 60px;
       padding: 0 20px;
     }
@@ -33,248 +32,313 @@
       font-size: 15px;
       color: #666;
     }
-
-    /* 單欄直排容器 */
-    .image-grid {
+     /* -------------------------------------------
+       PDF 下載提示橫幅設計 (依據 image_9388de.png)
+       ------------------------------------------- */
+    .pdf-download-banner {
       display: flex;
-      flex-direction: column;
-      gap: 40px; /* 圖片卡片之間的間距 */
-    }
-
-    .image-card {
-      background: #fff;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      border: 1px solid #eaeaea;
-      transition: transform 0.3s, box-shadow 0.3s;
-      cursor: pointer;
-      width: 100%;
-    }
-
-    .image-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-    }
-
-    /* 取消原本的 4:3 限制，讓圖片依據原比例自然延伸完整顯示 */
-    .card-img-wrapper {
-      position: relative;
-      width: 100%;
-      background-color: #f5f5f5;
-    }
-
-    .card-img-wrapper img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .img-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.2);
-      display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      color: #fff;
-      font-size: 18px;
+      background-color: #fdf5e6; /* 淺米色背景 */
+      border-left: 6px solid #d35400; /* 左側橘色粗邊框 */
+      padding: 15px 25px;
+      margin-bottom: 30px;
+      border-radius: 4px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    .banner-text {
+      color: #d35400;
       font-weight: bold;
+      font-size: 16px;
     }
 
-    .image-card:hover .img-overlay {
-      opacity: 1;
+    .banner-btn {
+      background-color: #d35400;
+      color: #ffffff;
+      padding: 10px 24px;
+      border-radius: 25px; /* 圓角按鈕 */
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 15px;
+      transition: background-color 0.3s, transform 0.2s;
+      white-space: nowrap;
     }
 
-    .card-info {
-      padding: 20px;
-      border-bottom: 1px solid #f0f0f0; /* 這裡原本是 border-top，請改成 border-bottom */
-      background-color: #fff;
+    .banner-btn:hover {
+      background-color: #b04600;
+      transform: translateY(-2px);
+      color: #ffffff;
     }
 
-    .card-info h3 {
-      font-size: 20px;
-      color: #333;
-      margin-bottom: 6px;
-      margin-top: 0;
+    /* -------------------------------------------
+       表格專屬 CSS 設計 (依據 image_9304a1.png)
+       ------------------------------------------- */
+    .table-responsive {
+      width: 100%;
+      overflow-x: auto;
+      margin-bottom: 40px;
+      border-radius: 6px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      border: 1px solid #e0e0e0;
     }
 
-    .card-info p {
+    .fee-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 900px; /* 防止在小螢幕過度擠壓 */
+      font-family: "Microsoft JhengHei", sans-serif;
+      background: #fff;
+    }
+
+    .fee-table th, .fee-table td {
+      border: 1px solid #e0e0e0;
+      padding: 12px 15px;
+      text-align: center;
+      vertical-align: middle;
+      line-height: 1.5;
+    }
+
+    /* 表頭設計 */
+    .fee-table thead th {
+      background-color: #2b577a; /* 深藍色質感表頭 */
+      color: #ffffff;
+      font-weight: 500;
+      font-size: 15px;
+    }
+    
+    .fee-table thead th.text-left {
+      text-align: left;
+    }
+
+    /* 第一欄樣式 */
+    .fee-table tbody td:first-child {
+      text-align: left;
+      color: #2b577a;
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    /* 斑馬紋設計 */
+    .fee-table tbody tr:nth-child(even) {
+      background-color: #fcfcfc;
+    }
+
+    .fee-table tbody tr:hover {
+      background-color: #f1f6fa;
+      transition: background-color 0.2s;
+    }
+    
+    /* 備註與法條區塊設計 */
+    .remarks-section {
+      background-color: #f9f9f9;
+      border-left: 4px solid #2b577a;
+      padding: 20px 25px;
+      margin-top: 30px;
+      border-radius: 0 6px 6px 0;
       font-size: 14px;
-      color: #666;
+      color: #444;
+      line-height: 1.8;
+    }
+    .remarks-section h3 {
+      color: #2b577a;
+      margin-top: 0;
+      font-size: 18px;
+    }
+    .remarks-section ol {
+      padding-left: 20px;
       margin-bottom: 0;
     }
-
-    /* 4. 點擊放大彈窗 (Modal) */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 2000;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.85);
-      justify-content: center;
-      align-items: center;
+    .remarks-section li {
+      margin-bottom: 8px;
     }
-
-    .modal-content {
-      max-width: 90%;
-      max-height: 90vh;
-      border-radius: 4px;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-    }
-
-    .close-modal {
-      position: absolute;
-      top: 20px;
-      right: 35px;
-      color: #fff;
-      font-size: 40px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: color 0.3s;
-    }
-
-    .close-modal:hover {
-      color: #0066cc;
-    }
-
-    /* 5. 右下角懸浮社群按鈕 */
-    .floating-socials {
-      position: fixed;
-      right: 20px;
-      bottom: 30px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      z-index: 1000;
-    }
-
-    .social-btn {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: white;
-      font-size: 22px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-      text-decoration: none;
-      transition: transform 0.2s;
-    }
-
-    .social-btn:hover {
-      transform: scale(1.1);
-    }
-
-    .btn-fb { background-color: #3b5998; }
-    .btn-line { background-color: #06c755; }
-    .btn-phone { background-color: #f37023; }
-    .btn-msg { background-color: #0084ff; }
 
     /* 響應式調整 */
     @media (max-width: 768px) {
       header { padding: 15px 20px; flex-direction: column; gap: 15px; }
       nav { flex-wrap: wrap; justify-content: center; }
       .container { padding: 0 15px; }
+      .fee-table { font-size: 14px; }
+      .fee-table thead th { font-size: 14px; padding: 10px; }
+
+      /* 橫幅手機版改為上下排列 */
+      .pdf-download-banner {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+        padding: 15px;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- 1. Header 頁首導覽 -->
   <div id="header-container"></div>
 
-  <!-- 2. Hero Banner 與橫幅標題 -->
-  <!-- <section class="hero-banner">
-    <h1 class="hero-title">收費標準</h1>
-  </section> -->
-
-  <!-- 麵包屑導航 (Breadcrumb) -->
   <div class="breadcrumb-container">
     <a href="index.html">首頁</a> &gt; <span>收費標準</span>
   </div>
 
-  <!-- 3. 主要內容區域（單欄直排圖片） -->
   <main class="container">
     <div class="section-intro">
       <h2>公證與認證費用標準表</h2>
       <p>本所收費完全依照司法院法定「公證費用標準表」收取，費用與法院公證處完全一致。</p>
     </div>
 
-    <div class="image-grid">
-      <!-- 圖片卡片 1 -->
-      <div class="image-card" onclick="openModal(this)">
-        <!-- 1. 文字區塊先出現 (在上方) -->
-        <div class="card-info">
-          <h3>一、公證費用標準表</h3>
-          <p>按標的金額/價額級距計算之公證與強制執行費用</p>
-        </div>
-        <!-- 2. 圖片區塊後出現 (在下方) -->
-        <div class="card-img-wrapper">
-          <img src="/P/c1.webp" alt="公證費用標準表（中文/強制執行）">
-          <div class="img-overlay">
-            <i class="fa-solid fa-magnifying-glass-plus"></i>&nbsp;點擊放大觀看
-          </div>
-        </div>
-      </div>
+    <!-- PDF 下載提示橫幅 -->
+    <div class="pdf-download-banner">
+      <div class="banner-text">※ 如以手機預覽，建議直接下載 PDF 檔方便瀏覽</div>
+      <!-- 這裡的 href 請替換成您實際 PDF 檔案的路徑 -->
+      <a href="notary-fee.pdf" class="banner-btn" target="_blank" download>下載公證費用標準表 (PDF)</a>
+    </div>
 
-      <!-- 圖片卡片 2 -->
-      <div class="image-card" onclick="openModal(this)">
-        <div class="card-info">
-          <h3>二、租賃與借貸契約試算說明</h3>
-          <p>包含總租金加押金計算範例與課稅現值對照</p>
-        </div>
-        <div class="card-img-wrapper">
-          <img src="/P/c2.webp" alt="租賃與借貸公證費用說明">
-          <div class="img-overlay">
-            <i class="fa-solid fa-magnifying-glass-plus"></i>&nbsp;點擊放大觀看
-          </div>
-        </div>
-      </div>
+    <!-- 表格一：級距收費表 -->
+    <div class="table-responsive">
+      <table class="fee-table">
+        <thead>
+          <tr>
+            <th rowspan="3" class="text-left" style="width: 28%;">
+              法律行為或涉及私權事實<br>標的金額、價額或請求公、認證事由
+            </th>
+            <th colspan="5" class="text-left">費用</th>
+          </tr>
+          <tr>
+            <th colspan="3" class="text-left">公證</th>
+            <th colspan="2" class="text-left">認證</th>
+          </tr>
+          <tr>
+            <th style="width: 14%;">作成中文公證書<br>（109）</th>
+            <th style="width: 15%;">公證書並載明逕受<br>強制執行（119）</th>
+            <th style="width: 15%;">作成外文、中外文對照<br>公證書（125）</th>
+            <th style="width: 13%;">認證中文文書<br>（120）</th>
+            <th style="width: 15%;">認證文書翻譯本、外文、中外文對照文書（125）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>不能算定（112）</td><td>1,000</td><td>1,500</td><td>1,500</td><td>500</td><td>750</td></tr>
+          <tr><td>20 萬元以下</td><td>1,000</td><td>1,500</td><td>1,500</td><td>500</td><td>750</td></tr>
+          <tr><td>逾 20 萬元 — 50 萬元</td><td>2,000</td><td>3,000</td><td>3,000</td><td>1,000</td><td>1,500</td></tr>
+          <tr><td>逾 50 萬元 — 100 萬元</td><td>3,000</td><td>4,500</td><td>4,500</td><td>1,500</td><td>2,250</td></tr>
+          <tr><td>逾 100 萬元 — 200 萬元</td><td>4,000</td><td>6,000</td><td>6,000</td><td>2,000</td><td>3,000</td></tr>
+          <tr><td>逾 200 萬元 — 500 萬元</td><td>5,000</td><td>7,500</td><td>7,500</td><td>2,500</td><td>3,750</td></tr>
+          <tr><td>逾 500 萬元 — 1,000 萬元</td><td>6,000</td><td>9,000</td><td>9,000</td><td>3,000</td><td>4,500</td></tr>
+          <tr><td>逾 1,000 萬元 — 2,000 萬元</td><td>8,000</td><td>12,000</td><td>12,000</td><td>4,000</td><td>6,000</td></tr>
+          <tr><td>逾 2,000 萬元 — 3,000 萬元</td><td>10,000</td><td>15,000</td><td>15,000</td><td>5,000</td><td>7,500</td></tr>
+          <tr><td>逾 3,000 萬元 — 4,000 萬元</td><td>12,000</td><td>18,000</td><td>18,000</td><td>6,000</td><td>9,000</td></tr>
+          <tr><td>逾 4,000 萬元 — 5,000 萬元</td><td>14,000</td><td>21,000</td><td>21,000</td><td>7,000</td><td>10,500</td></tr>
+          <tr><td>逾 5,000 萬元 — 6,000 萬元</td><td>15,000</td><td>22,500</td><td>22,500</td><td>7,500</td><td>11,250</td></tr>
+          <tr><td>逾 6,000 萬元 — 7,000 萬元</td><td>16,000</td><td>24,000</td><td>24,000</td><td>8,000</td><td>12,000</td></tr>
+          <tr><td>逾 7,000 萬元 — 8,000 萬元</td><td>17,000</td><td>25,500</td><td>25,500</td><td>8,500</td><td>12,750</td></tr>
+          <tr><td>逾 8,000 萬元 — 9,000 萬元</td><td>18,000</td><td>27,000</td><td>27,000</td><td>9,000</td><td>13,500</td></tr>
+          <tr><td>逾 9,000 萬元 — 1 億元</td><td>19,000</td><td>28,500</td><td>28,500</td><td>9,500</td><td>14,250</td></tr>
+          <tr><td>逾 1 億元 — 11,000 萬元</td><td>20,000</td><td>30,000</td><td>30,000</td><td>10,000</td><td>15,000</td></tr>
+          <tr><td>逾 11,000 萬元 — 12,000 萬元</td><td>21,000</td><td>31,500</td><td>31,500</td><td>10,500</td><td>15,750</td></tr>
+          <tr><td>逾 12,000 萬元 — 13,000 萬元</td><td>22,000</td><td>33,000</td><td>33,000</td><td>11,000</td><td>16,500</td></tr>
+          <tr><td>逾 13,000 萬元 — 14,000 萬元</td><td>23,000</td><td>34,500</td><td>34,500</td><td>11,500</td><td>17,250</td></tr>
+          <tr><td>逾 14,000 萬元 — 15,000 萬元</td><td>24,000</td><td>36,000</td><td>36,000</td><td>12,000</td><td>18,000</td></tr>
+          <tr><td>逾 15,000 萬元 — 16,000 萬元</td><td>25,000</td><td>37,500</td><td>37,500</td><td>12,500</td><td>18,750</td></tr>
+          <tr><td>逾 16,000 萬元 — 17,000 萬元</td><td>26,000</td><td>39,000</td><td>39,000</td><td>13,000</td><td>19,500</td></tr>
+          <tr><td>逾 17,000 萬元 — 18,000 萬元</td><td>27,000</td><td>40,500</td><td>40,500</td><td>13,500</td><td>20,250</td></tr>
+          <tr><td>逾 18,000 萬元 — 19,000 萬元</td><td>28,000</td><td>42,000</td><td>42,000</td><td>14,000</td><td>21,000</td></tr>
+          <tr><td>逾 19,000 萬元 — 2 億元</td><td>29,000</td><td>43,500</td><td>43,500</td><td>14,500</td><td>21,750</td></tr>
+        </tbody>
+      </table>
+    </div>
 
-      <!-- 圖片卡片 3 -->
-      <div class="image-card" onclick="openModal(this)">
-        <div class="card-info">
-          <h3>三、文書認證與翻譯計費</h3>
-          <p>單國/外文文書認證及授權書費用標準</p>
-        </div>
-        <div class="card-img-wrapper">
-          <img src="/P/c3.webp" alt="文書認證與翻譯計費標準">
-          <div class="img-overlay">
-            <i class="fa-solid fa-magnifying-glass-plus"></i>&nbsp;點擊放大觀看
-          </div>
-        </div>
-      </div>
+    <!-- 表格二：其他非財產/特殊項目收費表 -->
+    <div class="table-responsive">
+      <table class="fee-table">
+        <thead>
+          <tr>
+            <th class="text-left" style="width: 28%;">特定事件及項目</th>
+            <th style="width: 14%;">作成中文<br>（109）</th>
+            <th style="width: 15%;">載明逕受強執<br>（119）</th>
+            <th style="width: 15%;">外文或中外對照<br>（125）</th>
+            <th style="width: 13%;">認證中文<br>（120）</th>
+            <th style="width: 15%;">認證外文翻譯<br>（125）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>婚姻、認領、收養或其他非因財產關係事件（113）</td>
+            <td>1,000</td><td>-</td><td>1,500</td><td>500</td><td>750</td>
+          </tr>
+          <tr>
+            <td>公證結婚</td>
+            <td colspan="5" style="text-align: left; color: #444;">
+              同時請求發給中文結婚公證書及其外文翻譯本者，<strong>中文結婚公證書 1,000 元，翻譯費 400 元 (英文) / 600 元 (其他外文)</strong>。
+            </td>
+          </tr>
+          <tr>
+            <td>承認、允許或同意（114）</td>
+            <td>1,000</td><td>-</td><td>1,500</td><td>500</td><td>750</td>
+          </tr>
+          <tr>
+            <td>契約之解除或終止（114）</td>
+            <td>1,000</td><td>-</td><td>1,500</td><td>500</td><td>750</td>
+          </tr>
+          <tr>
+            <td>遺囑全部或一部之撤回（114）</td>
+            <td>1,000</td><td>-</td><td>1,500</td><td>500</td><td>750</td>
+          </tr>
+          <tr>
+            <td>法律行為之補充或更正 (114)</td>
+            <td>1,000</td><td>-</td><td>1,500</td><td>500</td><td>750</td>
+          </tr>
+          <tr>
+            <td>密封遺囑完成法定方式 (117)</td>
+            <td>1,000</td><td>-</td><td>1,500</td><td>-</td><td>-</td>
+          </tr>
+          <tr>
+            <td>授權書、催告書、受領證書 (118)</td>
+            <td>1,000</td><td>-</td><td>1,500</td><td>500</td><td>750</td>
+          </tr>
+          <tr>
+            <td>認證公文書、文書繕、影本</td>
+            <td>-</td><td>-</td><td>-</td><td>500</td><td>750</td>
+          </tr>
+          <tr>
+            <td>作成公證書體驗費 (115、細則86)</td>
+            <td colspan="5" style="text-align: left; color: #444;">按實際體驗所需時間，<strong>一小時加收 1,000 元</strong>；不滿一小時，按一小時計算。</td>
+          </tr>
+          <tr>
+            <td>於夜間、例假日或其他非辦公時間執行職務 (122)</td>
+            <td colspan="5" style="text-align: left; color: #444;">依公證法所定費用<strong>加收二分之一</strong>。但加收部分最高不得超過 5,000 元。</td>
+          </tr>
+          <tr>
+            <td>病榻前、車禍現場等場所執行職務 (123)</td>
+            <td colspan="5" style="text-align: left; color: #444;">加收 <strong>2,000 元</strong>。</td>
+          </tr>
+          <tr>
+            <td>公證書超過六張 (細則87、90)</td>
+            <td colspan="5" style="text-align: left; color: #444;">超過六張部分，<strong>每張加收 50 元</strong> (25字、20行為一張)。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-      <!-- 圖片卡片 4 -->
-      <div class="image-card" onclick="openModal(this)">
-        <div class="card-info">
-          <h3>四、法定其他費用與加收項目</h3>
-          <p>包含出場體驗費、假日辦理與超張費說明</p>
-        </div>
-        <div class="card-img-wrapper">
-          <img src="/P/c4.webp" alt="法定其他費用與出場體驗費">
-          <div class="img-overlay">
-            <i class="fa-solid fa-magnifying-glass-plus"></i>&nbsp;點擊放大觀看
-          </div>
-        </div>
-      </div>
+    <!-- 備註與法條文字區 -->
+    <div class="remarks-section">
+      <h3><i class="fa-solid fa-circle-info"></i> 公證費用備考與常見法條摘要</h3>
+      <ol>
+        <li>本法所定各項金額、價額及公證費用，均以新臺幣為單位。（法19）</li>
+        <li>關於計算公證事件標的價額，公證法未規定者，準用民事訴訟費用有關規定。（法110）</li>
+        <li>非財產關係之公證，並請求為財產關係之公證，其公證費用分別收取之。（法113）</li>
+        <li><strong>租賃契約：</strong><br>
+            (1) 論有無約定強制執行，均依租金總額或租賃物公告現值二者較高者，為其標的價額；如約定有保證金或押租金者，併計之。<br>
+            (2) 就租賃契約約定逕受強制執行者，依前項標準算定之公證費用加收二分之一；僅就租金約定強制執行時亦同。
+        </li>
+        <li><strong>翻譯費：</strong>中文每百字 200 元；英文每百字 200 元，其他外文每百字 300 元。未滿百字按百字計算。</li>
+        <li>民間公證人外出執行職務之交通費、住宿費及膳雜費，照國內出差旅費報支要點計算收取。</li>
+        <li>公證費用應依公證法所定費用收取，不得增減其數額。（法108）</li>
+      </ol>
     </div>
   </main>
 
   <!-- 圖片放大預覽彈窗 -->
-  <div id="imgModal" class="modal" onclick="closeModal()">
+  <!-- <div id="imgModal" class="modal" onclick="closeModal()">
     <span class="close-modal">&times;</span>
     <img class="modal-content" id="modalImage">
-  </div>
+  </div> -->
 
   <!-- 4. 右下角懸浮按鈕區塊 -->
   <!-- <div class="floating-socials">
