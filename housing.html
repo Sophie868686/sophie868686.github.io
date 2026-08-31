@@ -99,30 +99,7 @@
   <!-- 4. Footer 頁尾 (保持預留) -->
   <div id="footer-container"></div>
  
-  <script>
-      // 載入 Header (保持預留)
-      fetch('header.html')
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById('header-container').innerHTML = data;
-          // ⚠️ 等上面的動作完成後，這時候網頁裡才有按鈕，現在才來抓取它們！
-          const menuToggle = document.getElementById('menuToggle');
-          const mainNav = document.getElementById('mainNav');
+  <script src="main.js" defer></script>
 
-          // 確保按鈕存在後，綁定監聽點擊事件
-          if (menuToggle && mainNav) {
-            menuToggle.addEventListener('click', function() {
-              mainNav.classList.toggle('active');
-            });
-          }
-        });
-
-      // 載入 Footer (保持預留)
-      fetch('footer.html')
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById('footer-container').innerHTML = data;
-        });
-  </script>
 </body>
 </html>

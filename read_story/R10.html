@@ -73,67 +73,7 @@
   <!-- Footer 頁尾 -->
   <div id="footer-container"></div>
  
-  <script>
-      // 載入 Header
-      fetch('../header.html')
-      
-      .then(response => response.text())
-      .then(data => {
-        // 1. 將抓取到的 HTML 塞入容器中
-        document.getElementById('header-container').innerHTML = data;
+  <script src="/main.js" defer></script>
 
-        // =========================================
-        // 2. 處理原本的手機版漢堡選單
-        // =========================================
-        const menuToggle = document.getElementById('menuToggle');
-        const mainNav = document.getElementById('mainNav');
-        
-        if (menuToggle && mainNav) {
-          menuToggle.addEventListener('click', function() {
-            mainNav.classList.toggle('active');
-          });
-        }
-
-        // =========================================
-        // 3. 處理「稅務新聞」兩層選單點擊展開邏輯
-        // =========================================
-        // ⚠️ 此時網頁裡已經有 header 的內容了，可以安心選取
-        const submenuBtns = document.querySelectorAll(".dropdown-submenu > a");
-
-        submenuBtns.forEach(btn => {
-          btn.addEventListener("click", function (e) {
-            e.preventDefault();       // 阻止預設跳轉
-            e.stopPropagation();      // 防止事件往上冒泡
-
-            const currentSubmenu = this.parentElement;
-
-            // 手風琴效果：關閉其他已經展開的子選單
-            document.querySelectorAll(".dropdown-submenu").forEach(item => {
-              if (item !== currentSubmenu) {
-                item.classList.remove("active");
-              }
-            });
-
-            // 切換目前點擊項目的展開 / 收合狀態
-            currentSubmenu.classList.toggle("active");
-          });
-        });
-
-      })
-      .catch(error => {
-        console.error('載入 header 時發生錯誤:', error);
-      });
-
-      // 載入 Footer
-      fetch('../footer.html')
-        .then(response => {
-          if (!response.ok) throw new Error('Footer 載入失敗');
-          return response.text();
-        })
-        .then(data => {
-          document.getElementById('footer-container').innerHTML = data;
-        })
-        .catch(error => console.error('Error loading footer:', error));
-  </script>
 </body>
 </html>

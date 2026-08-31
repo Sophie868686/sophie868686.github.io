@@ -131,49 +131,7 @@
   <!-- 5. Footer 頁尾 (保持預留) -->
   <div id="footer-container"></div>
  
-  <script>
-      // 載入 Header (保持預留)
-      fetch('header.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('header-container').innerHTML = data;
+ <script src="main.js" defer></script>
 
-        const menuToggle = document.getElementById('menuToggle');
-        const mainNav = document.getElementById('mainNav');
-        
-        if (menuToggle && mainNav) {
-          menuToggle.addEventListener('click', function() {
-            mainNav.classList.toggle('active');
-          });
-        }
-
-        const submenuBtns = document.querySelectorAll(".dropdown-submenu > a");
-        submenuBtns.forEach(btn => {
-          btn.addEventListener("click", function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            const currentSubmenu = this.parentElement;
-            document.querySelectorAll(".dropdown-submenu").forEach(item => {
-              if (item !== currentSubmenu) {
-                item.classList.remove("active");
-              }
-            });
-            currentSubmenu.classList.toggle("active");
-          });
-        });
-
-      })
-      .catch(error => {
-        console.error('載入 header 時發生錯誤:', error);
-      });
-      
-      // 載入 Footer (保持預留)
-      fetch('footer.html')
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById('footer-container').innerHTML = data;
-        });
-    </script>
 </body>
 </html>
