@@ -324,12 +324,25 @@
         display: block;
     }
 
-    /* 滑鼠懸停時向下箭頭稍微旋轉 */
-    .dropdown:hover .fa-angle-up {
-        transform: rotate(180deg);
-        transition: transform 0.3s;
+    /* 1. 設定所有主選單與子選單內箭頭的基礎狀態與過渡動畫 */
+    .dropdown > a > i,
+    .dropdown-submenu > a > i {
+        transition: transform 0.3s ease;
+        display: inline-block; /* 確保 inline 元素可以被旋轉 */
     }
 
+    /* 2. 第一層主選單：滑鼠移入時，箭頭旋轉 180 度 */
+    .dropdown:hover > a > i {
+        transform: rotate(180deg);
+    }
+
+    /* 3. 第二層子選單：滑鼠移入（:hover）或手機版點擊展開（.active）時，箭頭旋轉 180 度 */
+    
+    .dropdown-submenu.active > a > i {
+        transform: rotate(180deg);
+    }
+
+    
     /* ========================================= */
     /* 新增的「第二層選單」CSS 樣式                */
     /* ========================================= */
