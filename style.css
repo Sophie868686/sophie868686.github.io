@@ -250,10 +250,7 @@
       transform: scale(1.1);
     }
 
-    .btn-fb { background-color: #3b5998; }
     .btn-line { background-color: #06c755; }
-    .btn-phone { background-color: #f37023; }
-    .btn-msg { background-color: #0084ff; }
 
     /* 🌟漢堡按鈕預設在電腦版隱藏 (放在響應式 @media 的上方) */
     .menu-toggle {

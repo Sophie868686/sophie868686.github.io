@@ -1,4 +1,3 @@
-
 function initHeaderEvents() {
   // 1. 手機版漢堡選單
   const menuToggle = document.getElementById('menuToggle');
@@ -9,24 +8,27 @@ function initHeaderEvents() {
       mainNav.classList.toggle('active');
     });
   }
+
   // 取得所有第一層的下拉按鈕
   const dropdownBtns = document.querySelectorAll('.dropdown-btn');
 
   dropdownBtns.forEach(btn => {
       btn.addEventListener('click', function(e) {
           e.preventDefault(); // 阻止任何預設跳轉行為
+          e.stopPropagation(); // 🌟 關鍵：阻止事件冒泡，避免觸發外層的 document 點擊事件
           
           const parentDropdown = this.closest('.dropdown');
-          
-          // （選擇性）點擊當前選單時，關閉其他已經打開的第一層選單，保持畫面整潔
+          const isOpen = parentDropdown.classList.contains('active'); // 檢查目前是否已經打開
+
+          // 關閉所有第一層選單
           document.querySelectorAll('.dropdown').forEach(item => {
-              if (item !== parentDropdown) {
-                  item.classList.remove('active');
-              }
+              item.classList.remove('active');
           });
 
-          // 切換當前第一層的 .active 狀態
-          parentDropdown.classList.toggle('active');
+          // 如果原本是關閉的，就打開它；如果原本就是打開的，因為上面全部清除過，所以就會順利關閉！
+          if (!isOpen) {
+              parentDropdown.classList.add('active');
+          }
       });
   });
 
@@ -46,6 +48,7 @@ function initHeaderEvents() {
       currentSubmenu.classList.toggle("active");
     });
   });
+
   // 點擊網頁其他空白處時，自動關閉所有打開的第一層選單
   document.addEventListener('click', function(e) {
       if (!e.target.closest('.dropdown')) {
@@ -70,6 +73,7 @@ fetch('/header.html')
   .catch(error => console.error('載入 header 時發生錯誤:', error));
   
 // 載入 Footer
+// 載入 Footer
 fetch('/footer.html')
   .then(response => {
     if (!response.ok) throw new Error('找不到 footer.html 檔案');
@@ -78,13 +82,42 @@ fetch('/footer.html')
   .then(data => {
     document.getElementById('footer-container').innerHTML = data;
     
-    // 加上安全檢查，避免 null 錯誤破壞 JavaScript 執行
+    // 加上安全檢查與互動邏輯
     const lineBtn = document.getElementById('line-btn');
     const lineQrCode = document.getElementById('line-qrcode');
+    const floatingSocials = document.querySelector('.floating-socials'); // 外層容器
 
-    if (lineBtn && lineQrCode) {
-      lineBtn.addEventListener('mouseenter', () => lineQrCode.style.display = 'block');
-      lineBtn.addEventListener('mouseleave', () => lineQrCode.style.display = 'none');
+    if (lineBtn && lineQrCode && floatingSocials) {
+      
+      // 1. 電腦版維持原本的 hover 效果
+      lineBtn.addEventListener('mouseenter', () => {
+        if (window.innerWidth > 768) {
+          lineQrCode.style.display = 'block';
+        }
+      });
+      
+      lineBtn.addEventListener('mouseleave', () => {
+        if (window.innerWidth > 768) {
+          lineQrCode.style.display = 'none';
+        }
+      });
+
+      // 2. 手機版（或點擊）：點擊 LINE 按鈕時切換 .active 狀態來開合 QR Code
+      lineBtn.addEventListener('click', (e) => {
+        // 如果是手機版尺寸，或是你想讓電腦版也能用點擊控制
+        if (window.innerWidth <= 768) {
+          e.preventDefault(); // 防止跳轉（如果 LINE 按鈕是 <a href="...">）
+          e.stopPropagation(); // 阻止冒泡
+          floatingSocials.classList.toggle('active');
+        }
+      });
+
+      // 3. 點擊畫面其他空白處時，自動關閉手機版展開的 LINE QR Code
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.floating-socials')) {
+          floatingSocials.classList.remove('active');
+        }
+      });
     }
   })
   .catch(error => console.error('載入 footer 時發生錯誤:', error));
