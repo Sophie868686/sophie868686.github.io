@@ -325,7 +325,7 @@
     }
 
     /* 滑鼠懸停時向下箭頭稍微旋轉 */
-    .dropdown:hover .fa-angle-down {
+    .dropdown:hover .fa-angle-up {
         transform: rotate(180deg);
         transition: transform 0.3s;
     }
@@ -373,7 +373,7 @@
 
     /* 當滑鼠移入分類時，向下展開第二層 */
     .dropdown-submenu.active > .submenu-content {
-        max-height: 800px; /* 設定一個大於內容實際總高度的安全值即可 */
+        max-height: 1200px; /* 設定一個大於內容實際總高度的安全值即可 */
         opacity: 1;
     }
 
