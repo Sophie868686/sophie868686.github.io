@@ -318,11 +318,13 @@
         background-color: #eaf2f8; /* 淺藍色高亮 */
         color: #0066cc;
     }
-
+    .dropdown-menu  {
+            display: none;
+        } 
     /* 核心魔法：滑鼠移入 .dropdown 容器時，顯示第一層選單 */
-    .dropdown:hover > .dropdown-menu {
+    /* .dropdown:hover > .dropdown-menu {
         display: block;
-    }
+    } */
 
     /* 1. 設定所有主選單與子選單內箭頭的基礎狀態與過渡動畫 */
     .dropdown > a > i,
@@ -335,8 +337,13 @@
     .dropdown:hover > a > i {
         transform: rotate(180deg);
     }
-
-    /* 3. 第二層子選單：滑鼠移入（:hover）或手機版點擊展開（.active）時，箭頭旋轉 180 度 */
+    /* 3. 確保第一層下拉選單預設是隱藏的 */
+    
+    /* 當電腦版 hover 時顯示 */
+    .dropdown:hover > .dropdown-menu {
+        display: block;
+    }
+    /*  第二層子選單：或手機版點擊展開（.active）時，箭頭旋轉 180 度 */
     
     .dropdown-submenu.active > a > i {
         transform: rotate(180deg);
@@ -497,6 +504,10 @@
         width: 100%;
         text-align: center;
       }
+      /* 1. 強制關閉手機版 hover 效果 */
+      .dropdown:hover > .dropdown-menu {
+          display: none !important; 
+      }
 
       .dropdown-menu {
         position: static; /* 核心魔法：取消懸浮，改為正常的網頁排版流，把下面的元素往下推 */
@@ -528,4 +539,14 @@
       .notary-card {
         padding: 25px 20px;
       }
+      .dropdown-menu {
+        display: none; 
+      }
+      .dropdown.active > .dropdown-menu {
+          display: block !important;
+      }
+      .dropdown.active > a > i {
+          transform: rotate(180deg) !important;
+      }
+      .dropdown:hover > a > i { transform: none; }
   }
