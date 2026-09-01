@@ -76,6 +76,15 @@
     padding-bottom: 12px;
   }
 
+  /* 👇 新增：讓計算標準上方的照片自動縮放 */
+  .calc-banner-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+    margin-bottom: 20px;
+  }
+
   /* 4. 單欄式滿版表單 */
   .calc-form {
     width: 100%;
@@ -253,6 +262,9 @@
   <main class="container">
     <div class="calc-card">
       <h2>房屋租約 — 公證費線上試算</h2>
+      <!--  在計算標準一上方加入照片 (src請填入您的圖片路徑) -->
+      <img src="./P/how_to_Calculate_fees.jpg" alt="試算說明圖" class="calc-banner-image">
+      
       <div class="calc-card-wrapper">
           <ul class="calc-notes">
             <li>計算標準(一)：總租金+押金</li>
