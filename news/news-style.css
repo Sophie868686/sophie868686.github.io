@@ -6,7 +6,7 @@
     line-height: 1.8;
     color: #333;
     background-color: #fcfcfc;
-  }
+  } 
   
 
   .case-title {
@@ -57,7 +57,7 @@
   
   /* 字體微調 (可選) */
   color: #333;
-  font-size: 16px;
+  font-size:16px;
   letter-spacing: 0.5px;
   font-weight: bold;
 }
@@ -160,7 +160,7 @@ img.case-photo {
   /* --- 雙欄佈局外觀 --- */
   .content-wrapper {
     display: flex;
-    max-width: 1200px; /* 您可依原本網站寬度調整 */
+    max-width:90%; /* 您可依原本網站寬度調整 */
     margin: 40px auto;
     padding: 0 20px;
     gap: 40px; /* 左側邊欄與右側內容的間距 */
@@ -201,7 +201,7 @@ img.case-photo {
 
   /* 分類標題 (法律文章等) */
   .sidebar-category {
-    font-size: 16px;
+    font-size: 24px;
     color: #333;
     margin: 15px 0 10px 20px;
   }
