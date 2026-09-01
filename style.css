@@ -174,8 +174,15 @@
     /* 右側文章列表 Content Grid */
     .article-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      grid-template-columns: 1fr;
       gap: 20px;
+      justify-items: center; /* 讓網格內的項目水平置中 */
+    }
+
+    .article-image {
+      width: 50%;
+      height: auto;
+      border-radius: 8px;
     }
 
     .article-card {

@@ -10,12 +10,77 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <style>
-      .notary-section {
+    /* 上方的名片與地圖區塊：電腦版並排，手機版自動堆疊 */
+    .content-top-row {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr; /* 左右各佔 50% 寬度 */
+      gap: 30px;
+      align-items: stretch;
+    }
+
+    /* 名片容器 */
+    .card-box {
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 51, 102, 0.08);
+      border: 1px solid #e1e8ed;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .card-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 6px;
+    }
+
+    /* 地圖容器 */
+    .map-box {
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 51, 102, 0.08);
+      border: 1px solid #e1e8ed;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .map-box h3 {
+      font-size: 20px;
+      color: #003366;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .map-responsive {
+      position: relative;
+      width: 100%;
+      flex-grow: 1;
+      min-height: 300px;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .map-responsive iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* 👇 公證人介紹區塊：改成 Grid 網格排版，電腦版自動變兩欄並排、自動縮放 */
+    .notary-section {
       max-width: 1100px;
       margin: 40px auto 80px;
       padding: 0 20px;
-      display: flex;
-      flex-direction: column;  /* 強制垂直上下排列 */
+      display: grid;
+      grid-template-columns: 1fr 1fr; /* 電腦版左右並排，各佔一半 */
       gap: 30px;
     }
 
@@ -26,6 +91,9 @@
       border: 1px solid #e1e8ed;
       padding: 35px 30px;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between; /* 讓內容高度一致 */
     }
 
     .notary-card:hover {
@@ -52,15 +120,14 @@
       align-items: center;
       font-size: 26px;
       flex-shrink: 0;
-      overflow: hidden; /* ⚠️ 記得補上這行：讓超出圓形範圍的照片被裁切掉 */
+      overflow: hidden; 
       object-position: center;
     }
 
-    /* 👇 加入這段全新的 CSS：控制照片不變形 */
     .notary-avatar img {
       width: 100%;
       height: 100%;
-      object-fit: cover; /* 自動裁切並完美填滿，保證照片比例不失真 */
+      object-fit: cover; 
       display: block;
     }
 
@@ -97,9 +164,8 @@
       line-height: 1.6;
     }
 
-    /* 列表勾選圖示 */
     .notary-info-list li::before {
-      content: "\f00c"; /* FontAwesome Check icon */
+      content: "\f00c"; 
       font-family: "Font Awesome 6 Free";
       font-weight: 900;
       position: absolute;
@@ -107,6 +173,14 @@
       top: 2px;
       color: #0066cc;
       font-size: 14px;
+    }
+
+    /* 響應式調整：當螢幕小於 768px（手機板）時，上方名片/地圖與下方公證人卡片全部改為單欄上下堆疊 */
+    @media (max-width: 768px) {
+      .content-top-row,
+      .notary-section {
+        grid-template-columns: 1fr;
+      }
     }
 </style>
 <body>
@@ -127,24 +201,24 @@
   <!-- 3. 主要內容區域 -->
   <main class="container">
     
-    <!-- 左側分類與搜尋 (Sidebar) -->
-  <!-- <aside>
-    <h2 class="sidebar-title">公證人資訊 <span>Notary Public</span></h2>
-    <ul class="category-list"> -->
-      <!-- 加入 a 標籤設定 href="about.html" -->
-      <!-- <a href="about.html" style="text-decoration: none; color: inherit; display: block;">
-        <li class="category-item active">公證人介紹</li>
-      </a>
-    </ul>
-</aside> -->
+    <!-- 上方並排區塊：左側名片、右側地圖 -->
+    <div class="content-top-row">
+      <!-- 名片圖片容器 -->
+      <div class="card-box">
+        <img src="./P/old.jpg" alt="名片">
+      </div>
 
-    <section class="article-grid">
-      <!-- <a>地圖圖片放置處</a> -->
-    </section>
+      <!-- Google Map 位置容器 -->
+      <div class="map-box">
+        <h3>事務所位置</h3>
+        <div class="map-responsive">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3682.358245580053!2d120.3023!3d22.6455!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346e04805f2b3c1d%3A0x5ca06ef2b425d57!2zODE36auY6ZuE5biC5LiJ5rCR5Y2A5Y2X5Y2A6LevOTHlj7c!5e0!3m2!1szh-TW!2stw!4v1650000000000!5m2!1szh-TW!2stw" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
 
-
+    <!-- 下方公證人介紹區塊（現已調整為電腦版兩欄並排，自動伸縮與響應） -->
     <section class="notary-section">
-
       <!-- 汪家合 公證人 -->
       <div class="notary-card">
         <div class="notary-header">
@@ -184,6 +258,7 @@
         </ul>
       </div>
     </section>
+
   </main>
 
   <div id="footer-container"></div>
