@@ -3,14 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>稅務新聞 - 三民公證</title>
+  <title>文章專區與判決故事 - 三民公證</title>
   <!-- 引入 FontAwesome 圖示庫 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="../style.css">
-  <link rel="stylesheet" href="news-style.css">
+  <link rel="stylesheet" href="/news/news-style.css">
 </head>
 <style>
+  /* 側邊欄整體寬度加寬 */
+  .sidebar {
+    width: 280px !important;
+    min-width: 280px !important;
+  }
+  .content-wrapper {
+    grid-template-columns: 280px 1fr !important;
+  }
+
   /* 列表頁專屬表格與排版樣式 */
+  .news-section-box {
+    display: none; /* 預設右側區塊全數隱藏，透過 JS 控制切換顯現 */
+    margin-bottom: 40px;
+    scroll-margin-top: 20px;
+  }
+
+  .news-section-box.active-section {
+    display: block; /* 被選中的區塊才會顯示 */
+  }
+
   .news-table-container {
     background: #ffffff;
     border-radius: 8px;
@@ -80,6 +99,98 @@
     font-size: 14px;
     white-space: nowrap;
   }
+
+  /* ========================================= */
+  /* 🌟 側邊欄樣式調整                           */
+  /* ========================================= */
+  .sidebar-category {
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    user-select: none;
+    padding: 6px 8px;
+    margin: 2px 0;
+    font-size: 15px; 
+    font-weight: bold; 
+    color: #333; 
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s;
+  }
+
+  .sidebar-category::after,
+  .sidebar-category::before {
+    display: none !important;
+  }
+
+  .sidebar-category:hover,
+  .sidebar-category.active {
+    color: #0066cc;
+    background-color: #eaf2f8;
+  }
+
+  /* 讓子選項容器的左右內距縮小，爭取更多空間 */
+  .sidebar-submenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease;
+    opacity: 0;
+    padding-left: 0;
+    padding-right: 0;
+    list-style: none;
+    background-color: #f8fafc;
+  }
+
+  .sidebar-submenu.active {
+    max-height: 1000px; /* 給予更大的安全高度 */
+    opacity: 1;
+    border-bottom: 1px solid #eee;
+  }
+
+  /* 調整子選項（每一行）的樣式 */
+  .sidebar-submenu li a {
+    display: block;
+    padding: 10px 12px 10px 18px; /* 增加上下 padding 讓每一行有呼吸空間 */
+    color: #444;
+    font-size: 13px;              /* 字體大小保持適中 */
+    line-height: 1.5;             /* 增加行高，避免文字黏在一起 */
+    text-decoration: none;
+    transition: background-color 0.2s;
+    border-bottom: 1px dashed #e2e8f0; /* 清晰的分隔虛線 */
+    word-break: break-all;        /* 確保長單字或標題能完美換行不卡住 */
+  }
+
+  .sidebar-submenu li:last-child a {
+    border-bottom: none;
+  }
+
+  /* 主分類標題也順便優化排版與行高 */
+  .sidebar-category {
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    user-select: none;
+    padding: 10px 12px;
+    margin: 4px 0;
+    font-size: 14px; 
+    font-weight: bold; 
+    color: #333; 
+    line-height: 1.4;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s;
+  }
+  
+
+  .sidebar-submenu li a::after,
+  .sidebar-submenu li a::before {
+    display: none !important;
+  }
+
+  .sidebar-submenu li a:hover {
+    background-color: #eaf2f8; 
+    color: #555 !important; 
+  }
 </style>
 
 <body>
@@ -88,12 +199,12 @@
 
   <!-- 2. Hero Banner 與橫幅標題 -->
   <section class="hero-banner">
-    <h1 class="hero-title">稅務新聞</h1>
+    <h1 class="hero-title">文章專區與判決故事</h1>
   </section>
 
   <!-- 麵包屑導航 -->
   <div class="breadcrumb-container">
-    <a href="../index.html"><i class="fas fa-home"></i></a> &gt; <span>稅務新聞</span>
+    <a href="../index.html"><i class="fas fa-home"></i></a> &gt; <span>文章專區</span>
   </div>
 
   <!-- 內容區塊外掛容器 (雙欄佈局) -->
@@ -102,78 +213,156 @@
     <!-- 左側邊欄 -->
     <aside class="sidebar">
       <ul class="sidebar-menu">
-        <li><a href="#" class="sidebar-title active">稅務新聞</a></li>
+        <!-- 文章總覽按鈕 -->
+        <li><a href="javascript:void(0)" id="overview-btn" class="sidebar-title active">文章總覽</a></li>
+        
+        <!-- 稅務新聞大類 -->
         <li>
-          <div class="sidebar-category">出租人相關稅務</div>
-          <ul class="sidebar-submenu">
-            <li><a href="/news/n1.html">設算押金利息</a></li>
-            <li><a href="/news/n4.html">無償提供他人設籍</a></li>
-            <li><a href="/news/n7.html">租金債權移轉</a></li>
-            <li><a href="/news/n8.html">營業人押金開立發票</a></li>
-            <li><a href="/news/n11.html">扣繳及健保補充保費</a></li>
+          <div style="font-size: 16px; font-weight: bold; color: #003366; padding: 12px 10px 5px;">稅務新聞</div>
+          
+          <div class="sidebar-category active" data-target="tax-landlord" data-section="section-tax-landlord">出租人相關稅務</div>
+          <ul class="sidebar-submenu active" id="tax-landlord">
+            <li><a href="/news/n1.html">營業人出租財產收取押金別忘設算押金利息計算銷售額。</a></li>
+            <li><a href="/news/n4.html">納稅義務人將房屋無償提供他人設籍營業或執行業務使用，仍應核算租賃收入</a></li>
+            <li><a href="/news/n7.html">個人將其財產出租之租金債權移轉與第三人...仍應申報綜合所得稅</a></li>
+            <li><a href="/news/n8.html">營業人出租財產收取押金，應設算押金利息，並開立統一發票報繳營業稅</a></li>
+            <li><a href="/news/n11.html">出租人應負擔之扣繳稅款及全民健保補充保費約定由承租人負擔者，視同租金收入（支出）</a></li>
+          </ul>
+
+          <div class="sidebar-category" data-target="tax-tenant" data-section="section-tax-tenant">承租人相關稅務</div>
+          <ul class="sidebar-submenu" id="tax-tenant">
+            <li><a href="/news/n2.html">解除租賃契約支付個人房東之違約金，記得要辦理免扣繳憑單申報</a></li>
+            <li><a href="/news/n3.html">承租人負擔扣繳稅款及健保補充保費，有關租金所得總額及扣繳稅額之計算</a></li>
+            <li><a href="/news/n5.html">承租共有物，扣繳義務人應按各共有人之持分比例分別開立扣繳憑單...</a></li>
+            <li><a href="/news/n9.html">承租房屋作為營業場所或執⾏業務使⽤，應依所得稅法規定扣繳稅款...</a></li>
+            <li><a href="/news/n10.html">小規模營業人給付租金或各類所得時，應辦理扣繳申報</a></li>
+          </ul>
+
+          <div class="sidebar-category" data-target="tax-other" data-section="section-tax-other">其他租賃相關稅務</div>
+          <ul class="sidebar-submenu" id="tax-other">
+            <li><a href="/news/n6.html">繼承人拋棄繼承後，仍可能被法院選任為遺產管理人</a></li>
           </ul>
         </li>
-        <li>
-          <div class="sidebar-category">承租人相關稅務</div>
-          <ul class="sidebar-submenu">
-            <li><a href="/news/n2.html">解除租約違約金</a></li>
-            <li><a href="/news/n3.html">租金所得總額計算</a></li>
-            <li><a href="/news/n5.html">承租共有物憑單</a></li>
-            <li><a href="/news/n9.html">營業或執行業務扣繳</a></li>
-            <li><a href="/news/n10.html">小規模營業人扣繳</a></li>
-          </ul>
-        </li>
-        <li>
-          <div class="sidebar-category">其他租賃相關稅務</div>
-          <ul class="sidebar-submenu">
-            <li><a href="/news/n6.html">拋棄繼承與遺產管理人</a></li>
+
+        <!-- 閱讀判決故事大類 -->
+        <li style="margin-top: 15px;">
+          <div style="font-size: 16px; font-weight: bold; color: #003366; padding: 12px 10px 5px;">閱讀判決故事</div>
+
+          <div class="sidebar-category" data-target="story-landlord" data-section="section-story-landlord">出租人相關判決</div>
+          <ul class="sidebar-submenu" id="story-landlord">
+            <li><a href="/read_story/R4.html">返還租賃物訴訟審理前 房東先就裁判費過高爭議告法院</a></li>
+            <li><a href="/read_story/R7.html">公證租約約定5倍房租之懲罰性違約金，法院裁定得逕為強制執行</a></li>
+            <li><a href="/read_story/R10.html">房東與房客串通低報租金，遭判刑四個月</a></li>
+            <li><a href="/read_story/R17.html">公證租約約定5倍房租之懲罰性違約金，法院裁定得逕為強制執行</a></li>
+            <li><a href="/read_story/R21.html">房客欠租落跑，房仲協助房東堵人追債，卻吃上官司</a></li>
+            <li><a href="/read_story/R22.html">房客違建遭拆除 房東原地違法重建應負刑責</a></li>
+            <li><a href="/read_story/R23.html">房東遭欠租走法院程序，竟耗逾兩年才收回房屋</a></li>
+            <li><a href="/read_story/R11.html">挑戰公權力連續違法重建四次 最牛的屋主遭判刑一年</a></li>
+            <li><a href="/read_story/R27.html">未經房客同意竟擅自帶看房屋，房東構成侵入住宅罪</a></li>
+            <li><a href="/read_story/R29.html">申報土增稅卻隱匿出租事實，房東遭判刑四個月</a></li>
+            <li><a href="/read_story/R30.html">租屋處發霉經房客終止租約 房東應退還押金及賠償裝潢費</a></li>
+            <li><a href="/read_story/R31.html">租約糾紛卻衍生房客檢舉房東逃漏稅 房東遭判刑一年六個月</a></li>
+            <li><a href="/read_story/R36.html">轉租房屋成凶宅，二房東遭判賠100萬元</a></li>
+            <li><a href="/read_story/R37.html">遭欠租後擅自幫房客打包物品 房東遭判拘役及判賠三萬元</a></li>
           </ul>
         </li>
       </ul>
     </aside>
 
-    <!-- 右側主內容 -->
+    <!-- 右側主內容：預設顯示文章總覽 -->
     <main class="main-content">
-      <div class="main-header-area">
-        <h2 class="section-title">稅務新聞</h2>
+      
+      <!-- 區塊 0：文章總覽 (預設顯示) -->
+      <div id="section-overview" class="news-section-box active-section">
+        <div class="main-header-area"><h2 class="section-title">文章總覽</h2></div>
+        <div class="news-table-container">
+          <table class="news-table">
+            <thead><tr><th>主題</th><th>時間</th></tr></thead>
+            <tbody>
+              <!-- 這裡您可以放入精選文章或綜合列表 -->
+              <tr><td><a href="/news/n1.html">營業人出租財產收取押金別忘設算押金利息計算銷售額。</a></td><td class="news-date">2026/03/15</td></tr>
+              <tr><td><a href="/news/n2.html">解除租賃契約支付個人房東之違約金，記得要辦理免扣繳憑單申報</a></td><td class="news-date">2026/03/10</td></tr>
+              <tr><td><a href="/news/n3.html">承租人負擔扣繳稅款及健保補充保費，有關租金所得總額及扣繳稅額之計算</a></td><td class="news-date">2026/02/20</td></tr>
+              <tr><td><a href="/read_story/R4.html">返還租賃物訴訟審理前 房東先就裁判費過高爭議告法院</a></td><td class="news-date">2026/03/01</td></tr>
+              <tr><td><a href="/read_story/R7.html">公證租約約定5倍房租之懲罰性違約金，法院裁定得逕為強制執行</a></td><td class="news-date">2025/10/12</td></tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
-      <div class="news-table-container">
-        <table class="news-table">
-          <thead>
-            <tr>
-              <th>主題</th>
-              <th>時間</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><a href="/news/n1.html">營業人出租財產收取押金別忘設算押金利息計算銷售額</a></td>
-              <td class="news-date">2026/03/15</td>
-            </tr>
-            <tr>
-              <td><a href="/news/n2.html">解除租賃契約支付個人房東之違約金，記得要辦理免扣繳憑單申報</a></td>
-              <td class="news-date">2026/03/10</td>
-            </tr>
-            <tr>
-              <td><a href="/news/n3.html">承租人負擔扣繳稅款及健保補充保費，有關租金所得總額及扣繳稅額之計算</a></td>
-              <td class="news-date">2026/02/20</td>
-            </tr>
-            <tr>
-              <td><a href="/news/n4.html">納稅義務人將房屋無償提供他人設籍營業或執行業務使用，仍應核算租賃收入</a></td>
-              <td class="news-date">2026/01/18</td>
-            </tr>
-            <tr>
-              <td><a href="/news/n5.html">承租共有物，扣繳義務人應按各共有人之持分比例分別開立扣繳憑單...</a></td>
-              <td class="news-date">2025/12/05</td>
-            </tr>
-            <tr>
-              <td><a href="/news/n6.html">繼承人拋棄繼承後，仍可能被法院選任為遺產管理人</a></td>
-              <td class="news-date">2025/11/12</td>
-            </tr>
-          </tbody>
-        </table>
+      <!-- 區塊 1：出租人相關稅務 -->
+      <div id="section-tax-landlord" class="news-section-box">
+        <div class="main-header-area"><h2 class="section-title">出租人相關稅務</h2></div>
+        <div class="news-table-container">
+          <table class="news-table">
+            <thead><tr><th>主題</th><th>時間</th></tr></thead>
+            <tbody>
+              <tr><td><a href="/news/n1.html">營業人出租財產收取押金別忘設算押金利息計算銷售額。</a></td><td class="news-date">2026/03/15</td></tr>
+              <tr><td><a href="/news/n4.html">納稅義務人將房屋無償提供他人設籍營業或執行業務使用，仍應核算租賃收入</a></td><td class="news-date">2026/01/18</td></tr>
+              <tr><td><a href="/news/n7.html">個人將其財產出租之租金債權移轉與第三人...仍應申報綜合所得稅</a></td><td class="news-date">2025/12/20</td></tr>
+              <tr><td><a href="/news/n8.html">營業人出租財產收取押金，應設算押金利息，並開立統一發票報繳營業稅</a></td><td class="news-date">2025/11/10</td></tr>
+              <tr><td><a href="/news/n11.html">出租人應負擔之扣繳稅款及全民健保補充保費約定由承租人負擔者，視同租金收入（支出）</a></td><td class="news-date">2025/10/05</td></tr>
+            </tbody>
+          </table>
+        </div>
       </div>
+
+      <!-- 區塊 2：承租人相關稅務 -->
+      <div id="section-tax-tenant" class="news-section-box">
+        <div class="main-header-area"><h2 class="section-title">承租人相關稅務</h2></div>
+        <div class="news-table-container">
+          <table class="news-table">
+            <thead><tr><th>主題</th><th>時間</th></tr></thead>
+            <tbody>
+              <tr><td><a href="/news/n2.html">解除租賃契約支付個人房東之違約金，記得要辦理免扣繳憑單申報</a></td><td class="news-date">2026/03/10</td></tr>
+              <tr><td><a href="/news/n3.html">承租人負擔扣繳稅款及健保補充保費，有關租金所得總額及扣繳稅額之計算</a></td><td class="news-date">2026/02/20</td></tr>
+              <tr><td><a href="/news/n5.html">承租共有物，扣繳義務人應按各共有人之持分比例分別開立扣繳憑單...</a></td><td class="news-date">2025/12/05</td></tr>
+              <tr><td><a href="/news/n9.html">承租房屋作為營業場所或執⾏業務使⽤，應依所得稅法規定扣繳稅款...</a></td><td class="news-date">2025/09/15</td></tr>
+              <tr><td><a href="/news/n10.html">小規模營業人給付租金或各類所得時，應辦理扣繳申報</a></td><td class="news-date">2025/08/11</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 區塊 3：其他租賃相關稅務 -->
+      <div id="section-tax-other" class="news-section-box">
+        <div class="main-header-area"><h2 class="section-title">其他租賃相關稅務</h2></div>
+        <div class="news-table-container">
+          <table class="news-table">
+            <thead><tr><th>主題</th><th>時間</th></tr></thead>
+            <tbody>
+              <tr><td><a href="/news/n6.html">繼承人拋棄繼承後，仍可能被法院選任為遺產管理人</a></td><td class="news-date">2025/11/12</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 區塊 4：出租人相關判決 -->
+      <div id="section-story-landlord" class="news-section-box">
+        <div class="main-header-area"><h2 class="section-title">出租人相關判決</h2></div>
+        <div class="news-table-container">
+          <table class="news-table">
+            <thead><tr><th>主題</th><th>時間</th></tr></thead>
+            <tbody>
+              <tr><td><a href="/read_story/R4.html">返還租賃物訴訟審理前 房東先就裁判費過高爭議告法院</a></td><td class="news-date">2026/03/01</td></tr>
+              <tr><td><a href="/read_story/R7.html">公證租約約定5倍房租之懲罰性違約金，法院裁定得逕為強制執行</a></td><td class="news-date">2025/10/12</td></tr>
+              <tr><td><a href="/read_story/R10.html">房東與房客串通低報租金，遭判刑四個月</a></td><td class="news-date">2025/09/18</td></tr>
+              <tr><td><a href="/read_story/R17.html">公證租約約定5倍房租之懲罰性違約金，法院裁定得逕為強制執行</a></td><td class="news-date">2025/08/20</td></tr>
+              <tr><td><a href="/read_story/R21.html">房客欠租落跑，房仲協助房東堵人追債，卻吃上官司</a></td><td class="news-date">2025/07/14</td></tr>
+              <tr><td><a href="/read_story/R22.html">房客違建遭拆除 房東原地違法重建應負刑責</a></td><td class="news-date">2025/06/02</td></tr>
+              <tr><td><a href="/read_story/R23.html">房東遭欠租走法院程序，竟耗逾兩年才收回房屋</a></td><td class="news-date">2025/05/19</td></tr>
+              <tr><td><a href="/read_story/R11.html">挑戰公權力連續違法重建四次 最牛的屋主遭判刑一年</a></td><td class="news-date">2025/04/10</td></tr>
+              <tr><td><a href="/read_story/R27.html">未經房客同意竟擅自帶看房屋，房東構成侵入住宅罪</a></td><td class="news-date">2025/03/22</td></tr>
+              <tr><td><a href="/read_story/R29.html">申報土增稅卻隱匿出租事實，房東遭判刑四個月</a></td><td class="news-date">2025/02/15</td></tr>
+              <tr><td><a href="/read_story/R30.html">租屋處發霉經房客終止租約 房東應退還押金及賠償裝潢費</a></td><td class="news-date">2025/01/10</td></tr>
+              <tr><td><a href="/read_story/R31.html">租約糾紛卻衍生房客檢舉房東逃漏稅 房東遭判刑一年六個月</a></td><td class="news-date">2024/12/05</td></tr>
+              <tr><td><a href="/read_story/R36.html">轉租房屋成凶宅，二房東遭判賠100萬元</a></td><td class="news-date">2024/11/18</td></tr>
+              <tr><td><a href="/read_story/R37.html">遭欠租後擅自幫房客打包物品 房東遭判拘役及判賠三萬元</a></td><td class="news-date">2024/10/25</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
     </main>
 
   </div>
@@ -182,5 +371,74 @@
   <div id="footer-container"></div>
   
   <script src="/main.js" defer></script>
+
+  <!-- 子分類展開 + 右側文章區塊同步聯動切換邏輯 -->
+  <!-- 👇 修改後的 Script：支援預設顯示第一個區塊，且支援點擊切換與自動收合 -->
+ <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const categoryTriggers = document.querySelectorAll(".sidebar-category");
+      const overviewBtn = document.getElementById("overview-btn");
+
+      // 1. 點擊「文章總覽」按鈕時的邏輯
+      if (overviewBtn) {
+        overviewBtn.addEventListener("click", function(e) {
+          e.preventDefault();
+          
+          // 關閉所有左側子選單與標題 active 狀態
+          document.querySelectorAll(".sidebar-category").forEach(function(item) {
+            item.classList.remove("active");
+          });
+          document.querySelectorAll(".sidebar-submenu").forEach(function(menu) {
+            menu.classList.remove("active");
+          });
+
+          // 隱藏右側所有文章區塊
+          document.querySelectorAll(".news-section-box").forEach(function(box) {
+            box.classList.remove("active-section");
+          });
+
+          // 顯示「文章總覽」區塊
+          const overviewSection = document.getElementById("section-overview");
+          if (overviewSection) {
+            overviewSection.classList.add("active-section");
+          }
+        });
+      }
+
+      // 2. 點擊各個子分類的聯動切換邏輯
+      categoryTriggers.forEach(function(trigger) {
+        trigger.addEventListener("click", function() {
+          const targetSubId = this.getAttribute("data-target");
+          const targetSectionId = this.getAttribute("data-section");
+          const targetSubmenu = document.getElementById(targetSubId);
+          const isAlreadyActive = this.classList.contains("active");
+
+          // 關閉所有分類與子選單
+          document.querySelectorAll(".sidebar-category").forEach(function(item) {
+            item.classList.remove("active");
+          });
+          document.querySelectorAll(".sidebar-submenu").forEach(function(menu) {
+            menu.classList.remove("active");
+          });
+
+          // 隱藏右側所有的文章區塊
+          document.querySelectorAll(".news-section-box").forEach(function(box) {
+            box.classList.remove("active-section");
+          });
+
+          // 如果點擊的項目原本不是開著的，就將它展開並顯示對應右側區塊
+          if (!isAlreadyActive) {
+            this.classList.add("active");
+            targetSubmenu.classList.add("active");
+
+            const activeSection = document.getElementById(targetSectionId);
+            if (activeSection) {
+              activeSection.classList.add("active-section");
+            }
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>
