@@ -204,6 +204,9 @@ fetch('/footer.html')
             <ul class="sidebar-submenu">
               <li><a href="/news/n1.html">營業人出租財產收取押金別忘設算押金利息計算銷售額。</a></li>
               <li><a href="/news/n4.html">納稅義務人將房屋無償提供他人設籍營業或執行業務使用...</a></li>
+              <li><a href="/news/n7.html">個人將其財產出租之租金債權移轉與第三人...仍應申報綜合所得稅</a></li>
+              <li><a href="/news/n8.html">營業人出租財產收取押金，應設算押金利息，並開立統一發票報繳營業稅</a></li>
+              <li><a href="/news/n11.html">出租人應負擔之扣繳稅款及全民健保補充保費約定由承租人負擔者，視同租金收入（支出）</a></li>
               <!-- 即使有 100 篇也只需要在這裡維護一次 -->
             </ul>
           </li>
