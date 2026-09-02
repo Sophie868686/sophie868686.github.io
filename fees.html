@@ -230,26 +230,123 @@
     padding-top: 16px;
     margin-top: 14px;
   }
-
   @media (max-width: 768px) {
-    /* 您原本的設定保留... */
-    .calc-card-wrapper { padding: 0 15px; }
-    .calc-card { padding: 20px; }
-    .calc-form .radio-group { flex-direction: column; gap: 10px; }
+      header { 
+        padding: 15px 0 0 0; /* 取消左右內距，讓選單底線可以貼齊螢幕邊緣 */
+        flex-direction: column; 
+        gap: 15px; 
+      }
+      
+      .logo-container {
+        padding: 0 20px; /* 幫 Logo 獨立保留左右內距 */
+      }
 
-    /* 針對金額列的新增設定 */
-    .result-row { 
-      flex-direction: column; /* 改為上下排列 */
-      align-items: flex-start; /* 靠左對齊 */
-      gap: 8px; /* 標題跟金額之間加一點空隙 */
-    }
+      /* 顯示漢堡按鈕 */
+      .menu-toggle {
+        display: block;
+      }
+
+      /* 預設隱藏導覽列，並設定為垂直排列 */
+      nav { 
+        display: none; 
+        width: 100%;
+        flex-direction: column; 
+        background-color: #fff;
+        padding-bottom: 20px;
+      }
+
+      /* 讓選單內的項目在手機版寬度滿版並置中 */
+      nav > a, .dropdown {
+        width: 100%;
+        text-align: center;
+      }
+
+      nav > a, .dropdown > a {
+        display: block;
+        padding: 15px 20px;
+        border-bottom: 1px solid #fdfaf7;
+      }
+
+      /* 調整聯絡圖示的間距與置中 */
+      .header-icons {
+        justify-content: center;
+        padding-top: 15px;
+      }
+
+      /* 🌟 核心魔法：當 JS 加上 .active 類別時，將 display: none 改為 flex 顯示出來 */
+      nav.active {
+        display: flex;
+      }
+      /* 🌟 新增：修正手機版下拉選單的排版 */
+      .dropdown {
+        width: 100%;
+        text-align: center;
+      }
+      /* 1. 強制關閉手機版 hover 效果 */
+      .dropdown:hover > .dropdown-menu {
+          display: none !important; 
+      }
+
+      .dropdown-menu {
+        position: static; /* 核心魔法：取消懸浮，改為正常的網頁排版流，把下面的元素往下推 */
+        width: 100%;
+        box-shadow: none; /* 拿掉懸浮陰影 */
+        border: none;
+        border-radius: 0;
+        background-color: #f9f9f9; /* 給一點淺灰底色，區別主選單與子選單 */
+        padding: 0;
+      }
+
+      .dropdown-menu a {
+        padding-left: 20px; /* 稍微往內縮排 */
+        font-size: 14px; /* 子選單字體可以稍微小一點 */
+        background-color: transparent;
+      }
     
-    /* 如果金額有獨立的 class (例如 .result-value)，可以設定靠右或靠左 */
-    .result-value {
-      width: 100%;
-      text-align: left; /* 或者設為 right，看您的視覺偏好 */
-    }
+      .container {
+        grid-template-columns: 1fr; /* 將原本的左右兩欄改為一欄 */
+      }
+
+      .sidebar-title {
+        text-align: center; 
+        margin-bottom: 15px;
+      }
+      .notary-section {
+        grid-template-columns: 1fr;
+      }
+      .notary-card {
+        padding: 25px 20px;
+      }
+      .dropdown-menu {
+        display: none; 
+      }
+      .dropdown.active > .dropdown-menu {
+          display: block !important;
+      }
+      .dropdown.active > a > i {
+          transform: rotate(180deg) !important;
+      }
+      .dropdown:hover > a > i { transform: none; }
+
+      /* 公證費計算卡片的新增設定 */
+      .calc-card-wrapper { padding: 0 15px; }
+      .calc-card { padding: 20px; }
+      .calc-form .radio-group { flex-direction: column; gap: 10px; }
+
+      /* 針對金額列的新增設定 */
+      .result-row { 
+        flex-direction: column; /* 改為上下排列 */
+        align-items: flex-start; /* 靠左對齊 */
+        gap: 8px; /* 標題跟金額之間加一點空隙 */
+      }
+      
+      /* 如果金額有獨立的 class (例如 .result-value)，可以設定靠右或靠左 */
+      .result-value {
+        width: 100%;
+        text-align: left; /* 或者設為 right，看您的視覺偏好 */
+      }
   }
+
 </style>
 
 <body>
@@ -549,26 +646,31 @@
     }
 
     // 載入 Header/Footer Component
-    function loadComponent(id, file) {
+    // 1. 修改 loadComponent 支援載入完成後執行 callback
+    function loadComponent(id, file, callback) {
       fetch(file)
-        .then(response => {
-          if (!response.ok) throw new Error('Network error');
-          return response.text();
-        })
+        .then(response => response.text())
         .then(data => {
           document.getElementById(id).innerHTML = data;
-        })
-        .catch(err => {
-          console.warn(`無法載入 ${file}`, err);
+          if (typeof callback === 'function') callback(); // 載入完立刻綁定事件！
         });
     }
 
-    window.addEventListener('DOMContentLoaded', () => {
-      loadComponent('header-container', 'header.html');
-      loadComponent('footer-container', 'footer.html');
+    // 2. 綁定漢堡選單的邏輯
+    function initMenu() {
+      const menuToggle = document.querySelector('.menu-toggle');
+      const nav = document.querySelector('nav');
+      if (menuToggle && nav) {
+        menuToggle.onclick = () => nav.classList.toggle('active');
+      }
+    }
 
-      
+    // 3. 執行載入，並把綁定函式傳進去
+    window.addEventListener('DOMContentLoaded', () => {
+      loadComponent('header-container', 'header.html', initMenu);
+      loadComponent('footer-container', 'footer.html');
     });
+
   </script>
 
 </body>

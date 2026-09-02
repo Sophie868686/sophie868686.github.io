@@ -553,4 +553,22 @@
           transform: rotate(180deg) !important;
       }
       .dropdown:hover > a > i { transform: none; }
+
+      /* 公證費計算卡片的新增設定 */
+      .calc-card-wrapper { padding: 0 15px; }
+      .calc-card { padding: 20px; }
+      .calc-form .radio-group { flex-direction: column; gap: 10px; }
+
+      /* 針對金額列的新增設定 */
+      .result-row { 
+        flex-direction: column; /* 改為上下排列 */
+        align-items: flex-start; /* 靠左對齊 */
+        gap: 8px; /* 標題跟金額之間加一點空隙 */
+      }
+      
+      /* 如果金額有獨立的 class (例如 .result-value)，可以設定靠右或靠左 */
+      .result-value {
+        width: 100%;
+        text-align: left; /* 或者設為 right，看您的視覺偏好 */
+      }
   }
