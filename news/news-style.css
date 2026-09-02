@@ -228,16 +228,7 @@ img.case-photo {
     color: #79B5D2;
   }
 
-  /* 子選單前方的 > 圖示 (使用您引入的 FontAwesome) */
-  .sidebar-submenu li a::before {
-    content: "\f105"; /* angle-right icon */
-    font-family: "Font Awesome 6 Free";
-    font-weight: 900;
-    position: absolute;
-    left: 20px;
-    color: #999;
-    font-size: 14px;
-  }
+  
 
   /* 移除最後一項的底線 */
   .border-bottom-none {

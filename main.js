@@ -119,5 +119,96 @@ fetch('/footer.html')
         }
       });
     }
+
+
   })
   .catch(error => console.error('載入 footer 時發生錯誤:', error));
+  document.addEventListener("DOMContentLoaded", function() {
+      const categoryTriggers = document.querySelectorAll(".sidebar-category");
+      const overviewBtn = document.getElementById("overview-btn");
+
+      // 1. 點擊「文章總覽」按鈕時的邏輯
+      if (overviewBtn) {
+        overviewBtn.addEventListener("click", function(e) {
+          e.preventDefault();
+          
+          // 關閉所有左側子選單與標題 active 狀態
+          document.querySelectorAll(".sidebar-category").forEach(function(item) {
+            item.classList.remove("active");
+          });
+          document.querySelectorAll(".sidebar-submenu").forEach(function(menu) {
+            menu.classList.remove("active");
+          });
+
+          // 隱藏右側所有文章區塊
+          document.querySelectorAll(".news-section-box").forEach(function(box) {
+            box.classList.remove("active-section");
+          });
+
+          // 顯示「文章總覽」區塊
+          const overviewSection = document.getElementById("section-overview");
+          if (overviewSection) {
+            overviewSection.classList.add("active-section");
+          }
+        });
+      }
+
+      // 2. 點擊各個子分類的聯動切換邏輯
+      categoryTriggers.forEach(function(trigger) {
+        trigger.addEventListener("click", function() {
+          const targetSubId = this.getAttribute("data-target");
+          const targetSectionId = this.getAttribute("data-section");
+          const targetSubmenu = document.getElementById(targetSubId);
+          const isAlreadyActive = this.classList.contains("active");
+
+          // 關閉所有分類與子選單
+          document.querySelectorAll(".sidebar-category").forEach(function(item) {
+            item.classList.remove("active");
+          });
+          document.querySelectorAll(".sidebar-submenu").forEach(function(menu) {
+            menu.classList.remove("active");
+          });
+
+          // 隱藏右側所有的文章區塊
+          document.querySelectorAll(".news-section-box").forEach(function(box) {
+            box.classList.remove("active-section");
+          });
+
+          // 如果點擊的項目原本不是開著的，就將它展開並顯示對應右側區塊
+          if (!isAlreadyActive) {
+            this.classList.add("active");
+            targetSubmenu.classList.add("active");
+
+            const activeSection = document.getElementById(targetSectionId);
+            if (activeSection) {
+              activeSection.classList.add("active-section");
+            }
+          }
+        });
+      });
+    });
+    document.addEventListener("DOMContentLoaded", function() {
+      const sidebarContainer = document.getElementById("sidebar-container");
+      if (!sidebarContainer) return;
+
+      // 集中管理您的所有分類與文章連結
+      sidebarContainer.innerHTML = `
+        <ul class="sidebar-menu">
+          <li><a href="/news/index.html" class="sidebar-title">文章總覽</a></li>
+          
+          <!-- 稅務新聞 -->
+          <li>
+            <div style="font-size: 16px; font-weight: bold; color: #003366; padding: 12px 10px 5px;">稅務新聞</div>
+            
+            <div class="sidebar-category">出租人相關稅務</div>
+            <ul class="sidebar-submenu">
+              <li><a href="/news/n1.html">營業人出租財產收取押金別忘設算押金利息計算銷售額。</a></li>
+              <li><a href="/news/n4.html">納稅義務人將房屋無償提供他人設籍營業或執行業務使用...</a></li>
+              <!-- 即使有 100 篇也只需要在這裡維護一次 -->
+            </ul>
+          </li>
+        </ul>
+      `;
+    });
+    
+
