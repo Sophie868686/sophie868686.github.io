@@ -1,5 +1,6 @@
+// 1. 手機版漢堡選單
 function initHeaderEvents() {
-  // 1. 手機版漢堡選單
+  
   const menuToggle = document.getElementById('menuToggle');
   const mainNav = document.getElementById('mainNav');
   
@@ -73,7 +74,6 @@ fetch('/header.html')
   .catch(error => console.error('載入 header 時發生錯誤:', error));
   
 // 載入 Footer
-// 載入 Footer
 fetch('/footer.html')
   .then(response => {
     if (!response.ok) throw new Error('找不到 footer.html 檔案');
@@ -123,9 +123,12 @@ fetch('/footer.html')
 
   })
   .catch(error => console.error('載入 footer 時發生錯誤:', error));
+  
+  
   document.addEventListener("DOMContentLoaded", function() {
       const categoryTriggers = document.querySelectorAll(".sidebar-category");
       const overviewBtn = document.getElementById("overview-btn");
+      const overviewSection = document.getElementById("section-overview");
 
       // 1. 點擊「文章總覽」按鈕時的邏輯
       if (overviewBtn) {
@@ -146,14 +149,13 @@ fetch('/footer.html')
           });
 
           // 顯示「文章總覽」區塊
-          const overviewSection = document.getElementById("section-overview");
           if (overviewSection) {
             overviewSection.classList.add("active-section");
           }
         });
       }
 
-      // 2. 點擊各個子分類的聯動切換邏輯
+      // 2. 點擊各個子分類展開/收合並切換右側內容
       categoryTriggers.forEach(function(trigger) {
         trigger.addEventListener("click", function() {
           const targetSubId = this.getAttribute("data-target");
@@ -161,7 +163,7 @@ fetch('/footer.html')
           const targetSubmenu = document.getElementById(targetSubId);
           const isAlreadyActive = this.classList.contains("active");
 
-          // 關閉所有分類與子選單
+          // 關閉所有左側分類與子選單
           document.querySelectorAll(".sidebar-category").forEach(function(item) {
             item.classList.remove("active");
           });
@@ -177,7 +179,9 @@ fetch('/footer.html')
           // 如果點擊的項目原本不是開著的，就將它展開並顯示對應右側區塊
           if (!isAlreadyActive) {
             this.classList.add("active");
-            targetSubmenu.classList.add("active");
+            if (targetSubmenu) {
+              targetSubmenu.classList.add("active");
+            }
 
             const activeSection = document.getElementById(targetSectionId);
             if (activeSection) {
@@ -204,9 +208,9 @@ fetch('/footer.html')
             <ul class="sidebar-submenu">
               <li><a href="/news/n1.html">營業人出租財產收取押金別忘設算押金利息計算銷售額。</a></li>
               <li><a href="/news/n4.html">納稅義務人將房屋無償提供他人設籍營業或執行業務使用...</a></li>
-              <li><a href="/news/n7.html">個人將其財產出租之租金債權移轉與第三人...仍應申報綜合所得稅</a></li>
-              <li><a href="/news/n8.html">營業人出租財產收取押金，應設算押金利息，並開立統一發票報繳營業稅</a></li>
-              <li><a href="/news/n11.html">出租人應負擔之扣繳稅款及全民健保補充保費約定由承租人負擔者，視同租金收入（支出）</a></li>
+              <li><a href="/news/n7.html">個人將其財產出租之租金債權移轉與第三人...仍應申報綜合所得稅</a>
+          <a href="/news/n8.html">營業人出租財產收取押金，應設算押金利息，並開立統一發票報繳營業稅</a>
+          <a href="/news/n11.html">出租人應負擔之扣繳稅款及全民健保補充保費約定由承租人負擔者，視同租金收入（支出）</a></li>
               <!-- 即使有 100 篇也只需要在這裡維護一次 -->
             </ul>
           </li>
