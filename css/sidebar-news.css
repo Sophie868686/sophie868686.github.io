@@ -1,0 +1,182 @@
+
+  /* 側邊欄整體寬度加寬 */
+  .sidebar {
+    width: 250px !important;
+    min-width: 250px !important;
+  }
+  .content-wrapper {
+    grid-template-columns: 250px 1fr !important;
+  }
+
+  /* 列表頁專屬表格與排版樣式 */
+  .news-section-box {
+    display: none; /* 預設右側區塊全數隱藏，透過 JS 控制切換顯現 */
+    margin-bottom: 40px;
+    scroll-margin-top: 20px;
+  }
+
+  .news-section-box.active-section {
+    display: block; /* 被選中的區塊才會顯示 */
+  }
+
+  .news-table-container {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 51, 102, 0.08);
+    border: 1px solid #e1e8ed;
+    overflow: hidden;
+  }
+
+  .news-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+  }
+
+  .news-table th {
+    background-color: #eaf2f8;
+    color: #003366;
+    padding: 16px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    border-bottom: 2px solid #0066cc;
+  }
+
+  .news-table th:last-child,
+  .news-table td:last-child {
+    text-align: right;
+    width: 130px;
+  }
+
+  .news-table td {
+    padding: 16px 20px;
+    border-bottom: 1px solid #edf1f5;
+    color: #444444;
+    font-size: 15px;
+  }
+
+  .news-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .news-table tr:hover td {
+    background-color: #f7f9fc;
+  }
+
+  .news-table a {
+    color: #333333;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    padding-left: 14px;
+    transition: color 0.2s;
+  }
+
+  .news-table a::before {
+    content: "▪";
+    position: absolute;
+    left: 0;
+    color: #0066cc;
+  }
+
+  .news-table a:hover {
+    color: #0066cc;
+  }
+
+  .news-date {
+    color: #888888;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+
+  /* ========================================= */
+  /* 🌟 側邊欄樣式調整                           */
+  /* ========================================= */
+  .sidebar-category {
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    user-select: none;
+    padding: 6px 8px;
+    margin: 2px 0;
+    font-size: 15px; 
+    font-weight: bold; 
+    color: #333; 
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s;
+  }
+
+  .sidebar-category::after,
+  .sidebar-category::before {
+    display: none !important;
+  }
+
+  .sidebar-category:hover,
+  .sidebar-category.active {
+    color: #0066cc;
+    background-color: #eaf2f8;
+  }
+
+  /* 讓子選項容器的左右內距縮小，爭取更多空間 */
+  .sidebar-submenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease;
+    opacity: 0;
+    padding-left: 0;
+    padding-right: 0;
+    list-style: none;
+    background-color: #f8fafc;
+  }
+
+  .sidebar-submenu.active {
+    max-height: 1000px; /* 給予更大的安全高度 */
+    opacity: 1;
+    border-bottom: 1px solid #eee;
+  }
+
+  /* 調整子選項（每一行）的樣式 */
+  .sidebar-submenu li a {
+    display: block;
+    padding: 10px 12px 10px 18px; /* 增加上下 padding 讓每一行有呼吸空間 */
+    color: #444;
+    font-size: 13px;              /* 字體大小保持適中 */
+    line-height: 1.5;             /* 增加行高，避免文字黏在一起 */
+    text-decoration: none;
+    transition: background-color 0.2s;
+    border-bottom: 1px dashed #e2e8f0; /* 清晰的分隔虛線 */
+    word-break: break-all;        /* 確保長單字或標題能完美換行不卡住 */
+  }
+
+  .sidebar-submenu li:last-child a {
+    border-bottom: none;
+  }
+
+  /* 主分類標題也順便優化排版與行高 */
+  .sidebar-category {
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    user-select: none;
+    padding: 10px 12px;
+    margin: 4px 0;
+    font-size: 14px; 
+    font-weight: bold; 
+    color: #333; 
+    line-height: 1.4;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s;
+  }
+  
+
+  .sidebar-submenu li a::after,
+  .sidebar-submenu li a::before {
+    display: none !important;
+  }
+
+  .sidebar-submenu li a:hover {
+    background-color: #eaf2f8; 
+    color: #555 !important; 
+  }

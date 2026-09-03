@@ -125,53 +125,51 @@ fetch('/footer.html')
   .catch(error => console.error('載入 footer 時發生錯誤:', error));
   
   
-  document.addEventListener("DOMContentLoaded", function() {
+ document.addEventListener("DOMContentLoaded", function() {
       const categoryTriggers = document.querySelectorAll(".sidebar-category");
       const overviewBtn = document.getElementById("overview-btn");
       const overviewSection = document.getElementById("section-overview");
+
+      // 共用的「回到文章總覽」邏輯
+      function showOverview() {
+        document.querySelectorAll(".sidebar-category").forEach(function(item) {
+          item.classList.remove("active");
+        });
+        document.querySelectorAll(".sidebar-submenu").forEach(function(menu) {
+          menu.classList.remove("active");
+        });
+        document.querySelectorAll(".news-section-box").forEach(function(box) {
+          box.classList.remove("active-section");
+        });
+        if (overviewSection) {
+          overviewSection.classList.add("active-section");
+        }
+      }
 
       // 1. 點擊「文章總覽」按鈕時的邏輯
       if (overviewBtn) {
         overviewBtn.addEventListener("click", function(e) {
           e.preventDefault();
-          
-          // 關閉所有左側子選單與標題 active 狀態
-          document.querySelectorAll(".sidebar-category").forEach(function(item) {
-            item.classList.remove("active");
-          });
-          document.querySelectorAll(".sidebar-submenu").forEach(function(menu) {
-            menu.classList.remove("active");
-          });
-
-          // 隱藏右側所有文章區塊
-          document.querySelectorAll(".news-section-box").forEach(function(box) {
-            box.classList.remove("active-section");
-          });
-
-          // 顯示「文章總覽」區塊
-          if (overviewSection) {
-            overviewSection.classList.add("active-section");
-          }
+          showOverview();
         });
       }
 
       // 2. 點擊各個子分類展開/收合並切換右側內容
       categoryTriggers.forEach(function(trigger) {
-        trigger.addEventListener("click", function() {
+        trigger.addEventListener("click", function(e) {
+          e.preventDefault();
           const targetSubId = this.getAttribute("data-target");
           const targetSectionId = this.getAttribute("data-section");
           const targetSubmenu = document.getElementById(targetSubId);
           const isAlreadyActive = this.classList.contains("active");
 
-          // 關閉所有左側分類與子選單
+          // 先將所有左側分類、子選單與右側文章區塊全部關閉/隱藏
           document.querySelectorAll(".sidebar-category").forEach(function(item) {
             item.classList.remove("active");
           });
           document.querySelectorAll(".sidebar-submenu").forEach(function(menu) {
             menu.classList.remove("active");
           });
-
-          // 隱藏右側所有的文章區塊
           document.querySelectorAll(".news-section-box").forEach(function(box) {
             box.classList.remove("active-section");
           });
@@ -187,10 +185,16 @@ fetch('/footer.html')
             if (activeSection) {
               activeSection.classList.add("active-section");
             }
+          } else {
+            // 第二次點擊同一項（收起），自動回到文章總覽
+            if (overviewSection) {
+              overviewSection.classList.add("active-section");
+            }
           }
         });
       });
     });
+
     document.addEventListener("DOMContentLoaded", function() {
       const sidebarContainer = document.getElementById("sidebar-container");
       if (!sidebarContainer) return;
