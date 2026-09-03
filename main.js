@@ -199,7 +199,7 @@ fetch('/footer.html')
       const sidebarContainer = document.getElementById("sidebar-container");
       if (!sidebarContainer) return;
 
-      // 集中管理您的所有分類與文章連結
+      // 集中管理所有分類與文章連結
       sidebarContainer.innerHTML = `
         <ul class="sidebar-menu">
           <li><a href="/news/index.html" class="sidebar-title">文章總覽</a></li>
