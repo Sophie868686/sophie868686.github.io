@@ -646,32 +646,6 @@
       document.getElementById('resultBox').classList.add('active');
     }
 
-    // 載入 Header/Footer Component
-    // 1. 修改 loadComponent 支援載入完成後執行 callback
-    function loadComponent(id, file, callback) {
-      fetch(file)
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById(id).innerHTML = data;
-          if (typeof callback === 'function') callback(); // 載入完立刻綁定事件！
-        });
-    }
-
-    // 2. 綁定漢堡選單的邏輯
-    function initMenu() {
-      const menuToggle = document.querySelector('.menu-toggle');
-      const nav = document.querySelector('nav');
-      if (menuToggle && nav) {
-        menuToggle.onclick = () => nav.classList.toggle('active');
-      }
-    }
-
-    // 3. 執行載入，並把綁定函式傳進去
-    window.addEventListener('DOMContentLoaded', () => {
-      loadComponent('header-container', 'header.html', initMenu);
-      loadComponent('footer-container', 'footer.html');
-    });
-
   </script>
 
 </body>
