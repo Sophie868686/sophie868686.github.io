@@ -8,6 +8,33 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href=" /css/style.css">
   <link rel="stylesheet" href=" /css/teaching_style.css">
+  <style>
+    /* 影片置中與響應式容器樣式 */
+    .video-section {
+      text-align: center;
+      margin: 25px 0;
+    }
+    .video-container {
+      position: relative;
+      width: 100%;
+      max-width: 700px; /* 限制最大寬度，避免在大螢幕上過大 */
+      margin: 0 auto;  /* 讓整個影片容器水平置中 */
+      padding-bottom: 56.25%; /* 16:9 比例 */
+      height: 0;
+      overflow: hidden;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      background: #000;
+    }
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+  </style>
 </head>
 
 <body>
@@ -22,11 +49,17 @@
     <div class="main-card">
       
       <h1 class="page-title">如何列印「二代健保補充保費」繳款書？<br>操作教學</h1>
-      <p class="intro-text">
+        <p class="intro-text">
         房客付租金時，欲扣繳 <span class="highlight-yellow">2.11% 二代健保補充保費</span>，繳款書列印步驟如下：
       </p>
 
+      <div class="video-container">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/-2hVnrfsytM" title="如何列印二代健保補充保費繳款書" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+
+
       <!-- 步驟 1 -->
+       <br
       <div class="step-card">
         <div class="step-header">
           <div class="step-number">1</div>
