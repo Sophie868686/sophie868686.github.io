@@ -1,3 +1,11 @@
+(function () {
+    const favicon = document.createElement('link');
+    favicon.rel = 'icon';
+    favicon.type = 'image/jpeg';
+    favicon.href = '/P/logo.jpg';
+
+    document.head.appendChild(favicon);
+})();
 // 1. 手機版漢堡選單
 function initHeaderEvents() {
   
